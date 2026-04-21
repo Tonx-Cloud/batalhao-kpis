@@ -871,13 +871,131 @@ function fecharInfo() {
   document.body.classList.remove('modal-open');
 }
 
-// Delegação de evento: qualquer botão .info-btn abre o modal
+// ============================================================
+// GLOSSÁRIO DIDÁTICO — Termos clicáveis na aba Teoria
+// ============================================================
+const INFO_TERMOS = {
+  exemplo: { titulo: 'Termos clicáveis', definicao: 'Todos os termos sublinhados abrem uma explicação como esta. Clique em qualquer um para aprofundar.' },
+
+  // Autores / publicações
+  reichheld: { titulo: 'Fred Reichheld', sigla: 'Bain & Company · Bain Fellow', definicao: 'Consultor americano, criador do NPS (2003). Seu trabalho seminal "The Loyalty Effect" (1996) estabeleceu a ligação entre retenção de clientes e lucratividade. Autor de "The Ultimate Question" (2006, 2011).', fonte: 'Bain & Company · Harvard Business School' },
+  hbr: { titulo: 'Harvard Business Review (HBR)', definicao: 'Revista de gestão publicada pela Harvard Business School Publishing desde 1922. Principal veículo de difusão de frameworks estratégicos acadêmicos para o mundo corporativo.', fonte: 'hbr.org' },
+  hbs: { titulo: 'Harvard Business School', definicao: 'Escola de negócios da Universidade Harvard, fundada em 1908. Referência global em pesquisa de estratégia, marketing e liderança. Publicou os frameworks de Porter, Christensen, Heskett, entre outros.' },
+  keiningham: { titulo: 'Keiningham et al. (2007)', definicao: 'Estudo publicado no Journal of Marketing (vol. 71) que replicou as análises originais do NPS e NÃO encontrou correlação superior com crescimento em relação ao CSAT (ACSI). Principal crítica acadêmica ao NPS.', fonte: 'Journal of Marketing, 71(3), 39-51' },
+  fornell: { titulo: 'Claes Fornell', definicao: 'Professor sueco-americano da Michigan Ross School of Business. Fundador do American Customer Satisfaction Index (ACSI) em 1994. Pioneiro na ligação entre satisfação e valor de mercado.' },
+  kotler: { titulo: 'Philip Kotler', definicao: 'Professor da Kellogg School (Northwestern). Considerado o "pai do marketing moderno". Formalizou o conceito de Customer Lifetime Value nos anos 1970 em "Marketing Management".' },
+  farris: { titulo: 'Farris, Bendle, Pfeifer & Reibstein', definicao: 'Autores do livro-referência "Marketing Metrics: The Definitive Guide to Measuring Marketing Performance" (2010), endossado pela MASB como padrão de métricas de marketing.', fonte: 'Pearson, 2nd ed.' },
+  heskett: { titulo: 'Heskett, Sasser & Schlesinger', definicao: 'Trio da Harvard Business School autores do artigo "Putting the Service-Profit Chain to Work" (HBR, 1994). O framework conecta clima interno → satisfação do funcionário → valor → cliente → lucro.' },
+  parasuraman: { titulo: 'Parasuraman, Zeithaml & Berry', definicao: 'Trio de pesquisadores que criou o modelo SERVQUAL em 1988. Leonard Berry é referência em Services Marketing. Valarie Zeithaml lidera a Kenan-Flagler (UNC).', fonte: 'Journal of Retailing, 64(1), 12-40' },
+  kano: { titulo: 'Noriaki Kano', definicao: 'Engenheiro de qualidade japonês, professor emérito da Tokyo University of Science. Criou o Modelo Kano (1984) que classifica atributos de produto em 5 categorias baseadas em como impactam a satisfação.' },
+  carlzon: { titulo: 'Jan Carlzon', definicao: 'CEO da SAS (Scandinavian Airlines) nos anos 1980. Cunhou o termo "moments of truth" no livro homônimo (1987), revolucionando a gestão de experiência em serviços.' },
+  deming: { titulo: 'W. Edwards Deming', definicao: 'Estatístico e consultor americano, pioneiro do controle estatístico de qualidade. Formou a base do milagre industrial japonês pós-guerra. Criou o ciclo PDCA.' },
+  juran: { titulo: 'Joseph Juran', definicao: 'Engenheiro romeno-americano, autor do "Juran\'s Quality Handbook". Definiu qualidade como "fitness for use". Criou a Trilogia de Juran (planejamento, controle, melhoria).' },
+  ishikawa: { titulo: 'Kaoru Ishikawa', definicao: 'Engenheiro químico japonês. Criou o diagrama espinha-de-peixe (Ishikawa) e popularizou os Círculos de Controle de Qualidade. Pioneiro da Qualidade Total no Japão.' },
+  mckinsey: { titulo: 'McKinsey & Company', definicao: 'Consultoria estratégica global fundada em 1926. Publicou em 2009 o framework "Customer Decision Journey", que substituiu o funil linear por um loop circular.' },
+  forrester: { titulo: 'Forrester Research', definicao: 'Empresa de pesquisa de mercado americana. Referência em Customer Experience Index (CX Index) e em métricas de jornada digital.' },
+  sqm: { titulo: 'SQM Group', definicao: 'Consultoria canadense especializada em Customer Experience e Call Centers. Seus estudos de 20+ anos demonstram que cada +1pp em FCR ≈ +1pp em CSAT e −1pp em custo operacional.' },
+  skok: { titulo: 'David Skok', definicao: 'Venture capitalist da Matrix Partners. Seu blog "For Entrepreneurs" é referência mundial em unit economics de SaaS. Popularizou as regras LTV/CAC ≥ 3 e CAC Payback ≤ 12 meses.' },
+  bessemer: { titulo: 'Bessemer Venture Partners', definicao: 'Fundo de VC americano fundado em 1911. Publica anualmente o "State of the Cloud Report", referência em benchmarks SaaS (NRR, ARR, Rule of 40, Magic Number).' },
+  vc: { titulo: 'Venture Capital (VC)', definicao: 'Capital de risco aplicado em startups em estágio inicial em troca de participação acionária. Fundos de VC consolidaram as métricas de unit economics que hoje são padrão na indústria.' },
+  masb: { titulo: 'MASB — Marketing Accountability Standards Board', definicao: 'Organização que estabelece padrões de mensuração de marketing análogos aos padrões contábeis (GAAP/IFRS). Endossa métricas como CLV, brand equity e marketing ROI.', fonte: 'themasb.org' },
+  acsi: { titulo: 'ACSI — American Customer Satisfaction Index', definicao: 'Índice nacional de satisfação do consumidor dos EUA, publicado trimestralmente desde 1994. Cobre 400+ empresas em 10 setores. Correlação comprovada com valor de mercado.', fonte: 'theacsi.org' },
+
+  // Conceitos NPS
+  promotores: { titulo: 'Promotores (NPS 9-10)', definicao: 'Clientes entusiastas que recomendam ativamente a marca. Geram crescimento via word-of-mouth e têm maior LTV. Meta: maximizar.' },
+  neutros: { titulo: 'Neutros / Passivos (NPS 7-8)', definicao: 'Satisfeitos mas não leais. Não entram no cálculo do NPS mas são os mais vulneráveis à concorrência. Meta: converter em promotores.' },
+  detratores: { titulo: 'Detratores (NPS 0-6)', definicao: 'Insatisfeitos que podem prejudicar a marca via boca-a-boca negativo. Custam 5-10× mais em suporte. Meta: identificar causa raiz e recuperar.' },
+  'word-of-mouth': { titulo: 'Word-of-Mouth (WoM)', definicao: 'Recomendação boca-a-boca entre consumidores. Estudos da Nielsen mostram que 83% dos consumidores confiam mais em recomendações de conhecidos do que em qualquer outra forma de publicidade.' },
+  enps: { titulo: 'eNPS — Employee Net Promoter Score', definicao: 'Aplicação do NPS internamente: "Em escala 0-10, quanto você recomendaria [empresa] como lugar para trabalhar?". Proxy prático do primeiro elo da Service-Profit Chain.' },
+
+  // Churn / Retenção
+  'momento-verdade': { titulo: 'Momento da Verdade', definicao: 'Conceito de Jan Carlzon (SAS, 1987): cada interação entre cliente e marca é um "momento" que define a percepção. Uma empresa média tem milhões desses momentos por ano.' },
+  'reichheld-1990': { titulo: 'Reichheld & Sasser (1990)', definicao: 'Artigo seminal "Zero Defections: Quality Comes to Services" (HBR). Demonstrou que reduzir churn em 5pp aumenta lucros em 25% a 95% conforme o setor, estabelecendo a economia da retenção.', fonte: 'HBR, 68(5), 105-111' },
+  geometrico: { titulo: 'Distribuição Geométrica', definicao: 'Modelo probabilístico que assume probabilidade constante de churn a cada período. Sob essa hipótese, vida média = 1/churn. Realidade costuma ter churn decrescente (efeito de maturação).' },
+  cohorts: { titulo: 'Análise de Cohorts', definicao: 'Segmentação de clientes por data de aquisição (ex.: mês). Permite comparar curvas de retenção de safras diferentes e isolar efeitos de mudanças operacionais ou de produto.' },
+  'kaplan-meier': { titulo: 'Kaplan–Meier', definicao: 'Estimador não-paramétrico de curvas de sobrevivência, originalmente de estatística médica. Em CRM, estima probabilidade de um cliente ainda estar ativo após t períodos, tolerando dados censurados.' },
+
+  // LTV / CAC
+  'discount-rate': { titulo: 'Taxa de desconto (WACC)', definicao: 'Custo médio ponderado de capital — representa o retorno mínimo exigido pelos provedores de capital (acionistas e credores). Usado para trazer fluxos futuros a valor presente.' },
+  npv: { titulo: 'NPV — Net Present Value', definicao: 'Valor presente líquido. Soma de fluxos de caixa futuros descontados pela taxa de capital. É o critério financeiro rigoroso para avaliar ativos — inclusive clientes.' },
+  'tobin-q': { titulo: "Tobin's Q", definicao: 'Razão entre valor de mercado da firma e custo de reposição de seus ativos. Proxy clássico de valor intangível. Estudos correlacionam ACSI com aumento de Q ao longo do tempo.' },
+  'cash-flow': { titulo: 'Cash Flow', definicao: 'Fluxo de caixa. Estudos de Anderson, Fornell e Mazvancheryl (J. Marketing, 2004) demonstraram que aumentos em satisfação do cliente antecedem aumentos em cash flow operacional.' },
+  'bg-nbd': { titulo: 'Modelo BG/NBD', definicao: 'Beta-Geometric / Negative Binomial Distribution (Fader, Hardie & Lee, 2005). Modela probabilisticamente compra e "morte" de clientes em contextos não-contratuais (varejo). Padrão-ouro para CLV em e-commerce.' },
+  'pareto-nbd': { titulo: 'Modelo Pareto/NBD', definicao: 'Predecessor do BG/NBD (Schmittlein, Morrison & Colombo, 1987). Combina Pareto para tempo de vida e NBD para frequência de compra. Historicamente usado em catálogos e direct marketing.' },
+  'unit-economics': { titulo: 'Unit Economics', definicao: 'Análise da lucratividade por unidade (cliente, transação, assinatura). Inclui receita, custo variável, margem de contribuição, CAC e LTV. Teste ácido de sustentabilidade antes de escalar.' },
+  subinvestimento: { titulo: 'Subinvestimento em crescimento', definicao: 'LTV/CAC muito alto (>5) pode indicar que a empresa está deixando dinheiro na mesa — poderia crescer mais rápido investindo mais em aquisição, mesmo reduzindo a razão.' },
+  payback: { titulo: 'CAC Payback', definicao: 'Tempo (em meses) para recuperar o CAC via margem bruta do cliente. Benchmark: ≤12m em SaaS, ≤18m em B2C. Impacta diretamente a necessidade de capital de giro.' },
+
+  // Service-Profit Chain / SERVQUAL
+  'qualidade-interna': { titulo: 'Qualidade do serviço interno', definicao: 'Como a empresa trata seus colaboradores: treinamento, ferramentas, autonomia, reconhecimento. Primeiro elo causal da Service-Profit Chain.' },
+  'produtividade-servico': { titulo: 'Produtividade em Serviços', definicao: 'Funcionários satisfeitos produzem mais, atendem melhor e ficam mais tempo — reduzindo custos de recrutamento e treinamento e elevando qualidade percebida pelo cliente.' },
+  lealdade: { titulo: 'Lealdade do cliente', definicao: 'Predisposição consistente a continuar comprando e recomendar. Vai além da satisfação: envolve compromisso emocional e resistência a ofertas da concorrência.' },
+  reliability: { titulo: 'Reliability (Confiabilidade)', definicao: 'Entregar o prometido com precisão e consistência. Dimensão mais valorizada do SERVQUAL em praticamente todos os setores pesquisados.' },
+  assurance: { titulo: 'Assurance (Segurança)', definicao: 'Conhecimento, competência e cortesia dos colaboradores que inspiram confiança. Crítico em serviços de alta complexidade (saúde, finanças, jurídico).' },
+  tangibles: { titulo: 'Tangibles (Tangíveis)', definicao: 'Instalações físicas, equipamentos, materiais de comunicação, aparência do pessoal. Evidências físicas que antecedem a formação de expectativa.' },
+  empathy: { titulo: 'Empathy (Empatia)', definicao: 'Atenção individualizada, entendimento das necessidades específicas do cliente. Diferencial competitivo em serviços premium.' },
+  responsiveness: { titulo: 'Responsiveness (Agilidade)', definicao: 'Disposição em ajudar clientes e fornecer serviço pronto. Tempo de resposta, proatividade na resolução de problemas.' },
+  'gap-model': { titulo: 'Modelo de Gaps (SERVQUAL)', definicao: 'SERVQUAL identifica 5 gaps: (1) gap de conhecimento, (2) de padrões, (3) de entrega, (4) de comunicação, (5) gap do cliente (expectativa vs percepção). Diagnóstico operacional.' },
+
+  // Kano
+  'must-be': { titulo: 'Must-be (Básico)', definicao: 'Atributos esperados como padrão. Ausência gera forte insatisfação, presença não gera encanto. Ex.: segurança em banco, limpeza em hotel.' },
+  'one-dim': { titulo: 'One-dimensional (Linear)', definicao: 'Atributos onde mais é melhor, menos é pior, de forma linear. Ex.: velocidade de entrega, preço competitivo, duração de bateria.' },
+  attractive: { titulo: 'Attractive (Encantador)', definicao: 'Atributos não esperados que geram encanto quando presentes mas não frustram quando ausentes. Fonte de diferenciação. Ex.: brinde inesperado, upgrade gratuito.' },
+  indifferent: { titulo: 'Indifferent (Indiferente)', definicao: 'Atributos cuja presença ou ausência não afeta satisfação. Tipicamente, recursos que a empresa valoriza mas o cliente ignora. Investir aqui é desperdício.' },
+  reverse: { titulo: 'Reverse (Reverso)', definicao: 'Atributos em que mais é pior. Ex.: excesso de features em produto simples, excesso de opções que paralisam decisão, notificações push em demasia.' },
+
+  // NRR / SaaS
+  saas: { titulo: 'SaaS — Software as a Service', definicao: 'Modelo de negócio de software por assinatura, onde receita recorrente substitui venda única. Tornou NRR, MRR, ARR e magic number as métricas dominantes.' },
+  'negative-churn': { titulo: 'Negative Churn', definicao: 'Situação em que expansão da base (upsell, cross-sell, preço) supera as perdas por churn. NRR > 100%. Permite crescer em ARR mesmo sem novos clientes.' },
+
+  // Qualidade / Produtividade
+  'qualidade-total': { titulo: 'Qualidade Total (TQM)', definicao: 'Filosofia de gestão originada no Japão pós-guerra, sintetizada por Deming, Juran e Ishikawa. Base do Toyota Production System e do Lean Manufacturing moderno.' },
+  lean: { titulo: 'Lean / TPS', definicao: 'Sistema de produção desenvolvido pela Toyota (Taiichi Ohno, Shigeo Shingo). Foco em eliminação de 7 desperdícios (muda): superprodução, espera, transporte, processamento, estoque, movimento, defeitos.' },
+  'fcr-teoria': { titulo: 'FCR — First Call Resolution', definicao: 'Percentual de chamadas/tickets resolvidos no primeiro contato, sem necessidade de retorno. É o KPI operacional mais correlacionado com CSAT: estudos do SQM Group mostram ≈1:1 (cada +1pp em FCR ≈ +1pp em CSAT).' },
+
+  // RFM
+  'direct-mail': { titulo: 'Direct Marketing', definicao: 'Indústria pré-digital de catálogos e mala-direta dos EUA (Lands\' End, L.L. Bean, Sears). Desenvolveu nos anos 1960 o RFM e as primeiras técnicas estatísticas de segmentação de clientes.' },
+  quintis: { titulo: 'Quintis', definicao: 'Divisão de uma distribuição em 5 partes iguais (20% cada). Em RFM, cada cliente recebe um score de 1 a 5 em cada eixo (Recency, Frequency, Monetary), gerando 125 segmentos possíveis.' },
+  recency: { titulo: 'Recency (R)', definicao: 'Quão recente foi a última compra. Das 3 dimensões do RFM, é a mais preditiva de próxima compra: quem comprou recentemente tem maior probabilidade de comprar de novo em breve.' },
+  frequency: { titulo: 'Frequency (F)', definicao: 'Número de compras em um período. Indica engajamento e hábito. Clientes de alta frequência tendem a ter LTV muito superior aos de baixa.' },
+  monetary: { titulo: 'Monetary (M)', definicao: 'Valor total gasto pelo cliente. Usado em conjunto com R e F — sozinho pode mascarar clientes de alto ticket mas baixa frequência (risco de concentração).' },
+
+  // Jornada
+  'customer-journey': { titulo: 'Customer Journey Mapping', definicao: 'Técnica visual que mapeia todas as interações do cliente com a marca ao longo do tempo, identificando pontos de contato, emoções, pain points e oportunidades de melhoria.' },
+  'pain-points': { titulo: 'Pain Points', definicao: 'Pontos de fricção específicos na jornada onde o cliente encontra dificuldade, atraso, confusão ou frustração. Priorização de melhorias deve começar pelos pain points de maior frequência × impacto.' }
+};
+
+function abrirTermo(termKey) {
+  const t = INFO_TERMOS[termKey];
+  if (!t) { console.warn('Termo não encontrado:', termKey); return; }
+  document.getElementById('modal-titulo').textContent = t.titulo;
+  document.getElementById('modal-sigla').innerHTML = t.sigla || '';
+  const body = document.getElementById('modal-body');
+  body.innerHTML = `
+    <h4>Definição</h4>
+    <p>${t.definicao}</p>
+    ${t.fonte ? `<p class="src"><b>Referência:</b> ${t.fonte}</p>` : ''}
+  `;
+  const modal = document.getElementById('modal-info');
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+}
+
+// Delegação de evento: .info-btn (KPIs) + .term (glossário teoria) + close
 document.addEventListener('click', (e) => {
   const btn = e.target.closest('.info-btn');
   if (btn) {
     e.preventDefault();
     e.stopPropagation();
     abrirInfo(btn.dataset.info);
+    return;
+  }
+  const term = e.target.closest('.term');
+  if (term) {
+    e.preventDefault();
+    e.stopPropagation();
+    abrirTermo(term.dataset.term);
     return;
   }
   if (e.target.matches('[data-close="1"]')) {

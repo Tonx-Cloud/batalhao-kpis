@@ -265,102 +265,147 @@
     <section id="teoria" class="view">
       <div class="hero">
         <h2>Referencial Teórico Ampliado</h2>
-        <p>Fórmulas + modelos complementares usados nas melhores escolas de negócios.</p>
+        <p>Fundamentos acadêmicos dos KPIs de varejo de serviços. <b>Clique nos termos sublinhados</b> para abrir a explicação completa (definição, exemplo, aplicação prática e referência).</p>
+      </div>
+
+      <div class="card" style="margin-bottom:16px">
+        <h3>🧭 Como navegar</h3>
+        <p>Cada card abaixo traz: (a) origem histórica da métrica, (b) fórmula canônica, (c) aplicação gerencial, (d) críticas e limitações da literatura. Os termos em <span class="term" data-term="exemplo">azul</span> são clicáveis.</p>
       </div>
 
       <div class="grid two-cols">
         <div class="card">
-          <h3>1. NPS — Reichheld (HBR, 2003)</h3>
+          <h3>1. NPS — Net Promoter Score</h3>
+          <p class="muted">Criado por <span class="term" data-term="reichheld">Fred Reichheld</span> e popularizado pelo artigo <i>The One Number You Need to Grow</i> (<span class="term" data-term="hbr">HBR</span>, 2003). Nasceu da frustração com pesquisas longas de satisfação que não previam comportamento real.</p>
           <p class="formula-block">NPS = %Promotores − %Detratores</p>
-          <p class="muted">Escala 0–10. Promotores (9–10), Neutros (7–8), Detratores (0–6). <b>Crítica:</b> Keiningham et al. (<i>J. Marketing</i>, 2007) mostram que a correlação com crescimento não é consistentemente superior ao CSAT.</p>
+          <p class="muted">Pergunta única: "Em escala 0–10, o quanto você nos recomendaria a um amigo?" <span class="term" data-term="promotores">Promotores</span> (9–10), <span class="term" data-term="neutros">Neutros</span> (7–8), <span class="term" data-term="detratores">Detratores</span> (0–6). A métrica busca capturar <span class="term" data-term="word-of-mouth">word-of-mouth</span> — o vetor mais confiável de crescimento orgânico.</p>
+          <p class="muted"><b>Crítica acadêmica:</b> <span class="term" data-term="keiningham">Keiningham et al. (2007)</span> mostraram que a correlação do NPS com crescimento <b>não é superior</b> à do CSAT tradicional (ACSI) em testes replicados. Use-o como sinal direcional, não como única verdade.</p>
         </div>
+
         <div class="card">
           <h3>2. CSAT & ACSI</h3>
-          <p class="formula-block">CSAT = (satisfeitos / total) × 100</p>
-          <p class="muted">O <b>American Customer Satisfaction Index</b> (ACSI) correlaciona com ROI, valor da firma (Tobin's Q) e cash flow (Anderson, Fornell &amp; Mazvancheryl, <i>J. Marketing</i>, 2004).</p>
+          <p class="muted">CSAT é a métrica <b>transacional</b> mais antiga. O <span class="term" data-term="acsi">American Customer Satisfaction Index (ACSI)</span> é um índice nacional publicado trimestralmente nos EUA desde 1994, fundado por <span class="term" data-term="fornell">Claes Fornell</span> na Michigan Ross.</p>
+          <p class="formula-block">CSAT = (Satisfeitos / Total) × 100</p>
+          <p class="muted">Estudos da série ACSI mostram correlação consistente com <span class="term" data-term="tobin-q">Tobin's Q</span>, valor de mercado, <span class="term" data-term="cash-flow">cash flow</span> e ROI (Anderson, Fornell &amp; Mazvancheryl, <i>J. Marketing</i> 2004). Firmas no topo 20% do ACSI <b>superam o S&amp;P 500</b> em retorno ao acionista.</p>
+          <p class="muted"><b>Aplicação:</b> meça CSAT logo após cada <span class="term" data-term="momento-verdade">momento da verdade</span> (compra, suporte, entrega) — não apenas anualmente.</p>
         </div>
 
         <div class="card">
           <h3>3. Churn & Tempo de Vida</h3>
-          <p class="formula-block">Churn = Perdidos / Total no período × 100</p>
+          <p class="muted">Churn é a contrapartida matemática da retenção. Um estudo clássico de <span class="term" data-term="reichheld-1990">Reichheld &amp; Sasser (HBR, 1990)</span> demonstrou que <b>reduzir churn em 5 pp pode aumentar lucros em 25% a 95%</b>, dependendo do setor.</p>
+          <p class="formula-block">Churn = Perdidos / Base média × 100</p>
           <p class="formula-block">Vida média = 1 / Churn anual</p>
-          <p class="muted">Ex.: churn 25% ⇒ vida média 4 anos. Análise agregada subestima churn em bases em rápido crescimento — prefira <b>cohorts</b>.</p>
+          <p class="muted">A relação <i>vida média = 1/churn</i> assume <span class="term" data-term="geometrico">distribuição geométrica</span> (churn constante). Em bases heterogêneas ou em rápido crescimento, prefira <span class="term" data-term="cohorts">análise de cohorts</span> — agrupe clientes por mês de aquisição e acompanhe a curva de sobrevivência. Ferramentas: <span class="term" data-term="kaplan-meier">Kaplan–Meier</span> (análise de sobrevivência).</p>
         </div>
 
         <div class="card">
-          <h3>4. LTV / CLV (Harvard · MASB)</h3>
-          <p class="formula-block">LTV = Margem × [ r / (1 + d − r) ]</p>
-          <p class="muted"><b>r</b> = retenção anual, <b>d</b> = custo de capital. Endossada pela MASB · Farris et al., <i>Marketing Metrics</i> (2010). Versão simples: <code>Margem / Churn</code>.</p>
+          <h3>4. LTV / CLV — Customer Lifetime Value</h3>
+          <p class="muted">Conceito formalizado por <span class="term" data-term="kotler">Philip Kotler</span> nos anos 1970, operacionalizado por <span class="term" data-term="farris">Farris, Bendle, Pfeifer &amp; Reibstein</span> em <i>Marketing Metrics</i> (2010). Endossado pela <span class="term" data-term="masb">MASB</span> (Marketing Accountability Standards Board) como padrão para relatórios financeiros de marketing.</p>
+          <p class="formula-block">LTV = ARPU × Margem × [ r / (1 + d − r) ]</p>
+          <p class="muted">Onde <b>r</b> = retenção (fração), <b>d</b> = <span class="term" data-term="discount-rate">taxa de desconto (WACC)</span>. Esta é a forma <span class="term" data-term="npv">NPV</span> (valor presente líquido), que <b>corrige o viés</b> da fórmula simplificada <code>Margem / Churn</code>, muito usada em SaaS mas que <b>superestima</b> o LTV por ignorar o custo de capital.</p>
+          <p class="muted"><b>Limitação:</b> pressupõe retenção constante. Para clientes heterogêneos, use modelos probabilísticos como <span class="term" data-term="bg-nbd">BG/NBD</span> (Fader, Hardie &amp; Lee) ou <span class="term" data-term="pareto-nbd">Pareto/NBD</span> (Schmittlein, Morrison &amp; Colombo, 1987).</p>
         </div>
 
         <div class="card">
-          <h3>5. CAC & LTV/CAC</h3>
+          <h3>5. CAC, LTV/CAC & Unit Economics</h3>
+          <p class="muted">O conceito de <span class="term" data-term="unit-economics">unit economics</span> vem do <span class="term" data-term="vc">venture capital</span> — popularizado por <span class="term" data-term="skok">David Skok</span> (Matrix Partners) e <span class="term" data-term="bessemer">Bessemer Venture Partners</span>. É o "teste ácido" de sustentabilidade.</p>
           <p class="formula-block">CAC = (Marketing + Vendas) / Novos clientes</p>
           <p class="formula-block">LTV/CAC ≥ 3 · CAC Payback ≤ 12m (SaaS) / 18m (B2C)</p>
-          <p class="muted">Bessemer Venture Partners · Harvard Business School · MIT Sloan.</p>
+          <p class="muted">A regra "LTV/CAC ≥ 3" tem origem empírica nos fundos de VC americanos: abaixo de 1, o negócio <b>queima caixa</b> a cada cliente; entre 1 e 3, é apertado; acima de 5, pode indicar <span class="term" data-term="subinvestimento">subinvestimento</span> em crescimento. Combine com <span class="term" data-term="payback">CAC Payback</span> para entender pressão de capital de giro.</p>
         </div>
 
         <div class="card">
           <h3>6. Service–Profit Chain</h3>
-          <p class="muted">Heskett, Sasser &amp; Schlesinger (HBR, 1994):</p>
+          <p class="muted">Framework seminal de <span class="term" data-term="heskett">Heskett, Sasser &amp; Schlesinger</span> (<i>Putting the Service–Profit Chain to Work</i>, <span class="term" data-term="hbs">Harvard Business School</span> / HBR, 1994). Baseado em estudos da Sears, Taco Bell, MBNA e Southwest Airlines.</p>
           <ul>
-            <li>Satisfação do funcionário → Qualidade do serviço interno</li>
-            <li>→ Valor percebido → Satisfação &amp; lealdade</li>
-            <li>→ Crescimento &amp; lucro</li>
+            <li><b>1.</b> <span class="term" data-term="qualidade-interna">Qualidade do serviço interno</span> → satisfação do funcionário</li>
+            <li><b>2.</b> Funcionário satisfeito → <span class="term" data-term="produtividade-servico">produtividade &amp; retenção</span></li>
+            <li><b>3.</b> → valor percebido externo pelo cliente</li>
+            <li><b>4.</b> → satisfação + <span class="term" data-term="lealdade">lealdade</span> do cliente</li>
+            <li><b>5.</b> → <b>crescimento de receita + lucro</b></li>
           </ul>
-          <p class="muted"><b>eNPS</b> é o proxy prático para o primeiro elo.</p>
+          <p class="muted">Implicação: KPIs de gente (<span class="term" data-term="enps">eNPS</span>) são <b>antecedentes causais</b> de KPIs financeiros. Medir apenas resultado é tarde demais.</p>
         </div>
 
         <div class="card">
-          <h3>7. SERVQUAL — RATER</h3>
-          <p class="muted">Parasuraman, Zeithaml &amp; Berry (1988):</p>
+          <h3>7. SERVQUAL — Modelo RATER</h3>
+          <p class="muted">Desenvolvido por <span class="term" data-term="parasuraman">Parasuraman, Zeithaml &amp; Berry</span> (<i>J. Retailing</i>, 1988). Mede qualidade de serviço por <b>gap entre expectativa e percepção</b>. Base acadêmica da disciplina de Services Marketing.</p>
           <ul>
-            <li><b>R</b>eliability — confiabilidade</li>
-            <li><b>A</b>ssurance — segurança</li>
-            <li><b>T</b>angibles — aspectos físicos</li>
-            <li><b>E</b>mpathy — empatia</li>
-            <li><b>R</b>esponsiveness — agilidade</li>
+            <li><b>R</b>eliability — <span class="term" data-term="reliability">entregar o prometido com precisão</span></li>
+            <li><b>A</b>ssurance — <span class="term" data-term="assurance">conhecimento e cortesia que geram confiança</span></li>
+            <li><b>T</b>angibles — <span class="term" data-term="tangibles">instalações, equipamentos, aparência</span></li>
+            <li><b>E</b>mpathy — <span class="term" data-term="empathy">atenção individualizada</span></li>
+            <li><b>R</b>esponsiveness — <span class="term" data-term="responsiveness">disposição para ajudar rapidamente</span></li>
           </ul>
+          <p class="muted">Crítica: o modelo de <span class="term" data-term="gap-model">gaps</span> foi questionado por Cronin &amp; Taylor (1992), que propuseram o <b>SERVPERF</b> (só percepção, sem expectativa). Na prática, a maioria das empresas usa variantes simplificadas.</p>
         </div>
 
         <div class="card">
           <h3>8. Modelo Kano (1984)</h3>
-          <p class="muted">5 categorias de atributos:</p>
+          <p class="muted"><span class="term" data-term="kano">Noriaki Kano</span>, engenheiro de qualidade da Tokyo University of Science, propôs que satisfação <b>não é linear</b> — atributos têm naturezas diferentes.</p>
           <ul>
-            <li><b>Must-be</b> — básicos</li>
-            <li><b>One-dimensional</b> — lineares</li>
-            <li><b>Attractive</b> — encantadores</li>
-            <li><b>Indifferent</b> — irrelevantes</li>
-            <li><b>Reverse</b> — quanto mais, pior</li>
+            <li><b>Must-be</b> — <span class="term" data-term="must-be">básicos; ausência frustra, presença não encanta</span></li>
+            <li><b>One-dimensional</b> — <span class="term" data-term="one-dim">lineares; mais é melhor</span> (ex.: velocidade)</li>
+            <li><b>Attractive</b> — <span class="term" data-term="attractive">encantadores; surpreendem positivamente</span></li>
+            <li><b>Indifferent</b> — <span class="term" data-term="indifferent">irrelevantes para o cliente</span></li>
+            <li><b>Reverse</b> — <span class="term" data-term="reverse">quanto mais, pior</span> (ex.: excesso de features)</li>
           </ul>
+          <p class="muted"><b>Dinâmica:</b> atributos <i>attractive</i> viram <i>one-dimensional</i> e depois <i>must-be</i> com o tempo (ex.: Wi-Fi em hotel).</p>
         </div>
 
         <div class="card">
-          <h3>9. NRR & Revenue Churn</h3>
-          <p class="formula-block">NRR = Receita atual / Receita anterior × 100</p>
+          <h3>9. NRR & Revenue Retention</h3>
+          <p class="muted">Métrica de ouro do universo <span class="term" data-term="saas">SaaS</span>. Popularizada pelo relatório <i>State of the Cloud</i> da <span class="term" data-term="bessemer">Bessemer</span>. Capta <b>dinâmica da base existente</b>: churn, downsell, upsell e cross-sell em uma única razão.</p>
+          <p class="formula-block">NRR = Receita atual da base / Receita anterior × 100</p>
           <p class="formula-block">Revenue Churn = max(0, 1 − NRR/100) × 100</p>
-          <p class="muted">NRR &gt; 100% indica expansão líquida (upsell &gt; churn).</p>
+          <p class="muted">NRR &gt; 100% = <span class="term" data-term="negative-churn">"negative churn"</span> — a expansão supera as perdas mesmo sem novos clientes. Empresas de classe mundial (Snowflake, Datadog) atingiram NRR &gt; 130%.</p>
+          <p class="muted"><b>Alavancas:</b> upsell, cross-sell, preço, redução de churn, migração para planos superiores.</p>
         </div>
 
         <div class="card">
-          <h3>10. Produtividade & Eficiência</h3>
+          <h3>10. Produtividade & Eficiência Operacional</h3>
+          <p class="muted">Raízes na escola da <span class="term" data-term="qualidade-total">Qualidade Total</span> (<span class="term" data-term="deming">Deming</span>, <span class="term" data-term="juran">Juran</span>, <span class="term" data-term="ishikawa">Ishikawa</span>) e em <span class="term" data-term="lean">Lean</span>/Toyota Production System.</p>
           <p class="formula-block">Produtividade = Receita / Nº funcionários</p>
-          <p class="formula-block">FCR = Resolvidos / Total · Conversão = Vendas / Atendimentos</p>
+          <p class="formula-block">FCR = Resolvidos no 1º contato / Total</p>
+          <p class="formula-block">Conversão = Vendas / Atendimentos</p>
+          <p class="muted"><span class="term" data-term="fcr-teoria">FCR</span> é o KPI operacional mais <b>correlacionado com CSAT</b>: cada +1 pp em FCR ≈ +1 pp em CSAT (<span class="term" data-term="sqm">SQM Group</span>, 20 anos de dados). Fecha o elo operacional da Service–Profit Chain.</p>
+        </div>
+
+        <div class="card">
+          <h3>11. RFM — Recency, Frequency, Monetary</h3>
+          <p class="muted">Modelo clássico de <span class="term" data-term="direct-mail">direct marketing</span> (anos 1960), ainda amplamente usado em CRM de varejo. Segmenta base em <span class="term" data-term="quintis">quintis</span> nos três eixos.</p>
+          <ul>
+            <li><b>R</b>ecency — <span class="term" data-term="recency">quão recente foi a última compra</span></li>
+            <li><b>F</b>requency — <span class="term" data-term="frequency">com que frequência compra</span></li>
+            <li><b>M</b>onetary — <span class="term" data-term="monetary">quanto gasta</span></li>
+          </ul>
+          <p class="muted">Clientes "5-5-5" (topo nos três eixos) recebem 6× mais resposta de marketing direto que a média. Base para modelos modernos como BG/NBD.</p>
+        </div>
+
+        <div class="card">
+          <h3>12. Jornada do Cliente & Momentos da Verdade</h3>
+          <p class="muted">Conceito de <span class="term" data-term="carlzon">Jan Carlzon</span> (CEO da SAS Airlines, anos 1980): cada interação é um <span class="term" data-term="momento-verdade">"momento da verdade"</span> em que a marca se prova. Ampliado em <span class="term" data-term="customer-journey">customer journey mapping</span> moderno (<span class="term" data-term="mckinsey">McKinsey</span>, <span class="term" data-term="forrester">Forrester</span>).</p>
+          <p class="muted">Etapas típicas: <b>awareness → consideração → compra → uso → suporte → lealdade/advocacia</b>. Mapear <span class="term" data-term="pain-points">pain points</span> em cada etapa revela onde os KPIs degradam.</p>
         </div>
       </div>
 
-      <div class="card">
-        <h3>📚 Referências</h3>
+      <div class="card" style="margin-top:16px">
+        <h3>📚 Referências Completas</h3>
         <ul class="refs">
-          <li>Reichheld, F. F. (2003). <i>The One Number You Need to Grow</i>. <b>Harvard Business Review</b>, 81(12).</li>
+          <li>Reichheld, F. F. (2003). <i>The One Number You Need to Grow</i>. <b>Harvard Business Review</b>, 81(12), 46–54.</li>
+          <li>Reichheld, F. F., &amp; Sasser, W. E. (1990). <i>Zero Defections: Quality Comes to Services</i>. HBR, 68(5).</li>
           <li>Reichheld &amp; Markey (2011). <i>The Ultimate Question 2.0</i>. HBR Press.</li>
-          <li>Heskett, Sasser &amp; Schlesinger (1994). <i>Putting the Service–Profit Chain to Work</i>. HBR.</li>
-          <li>Farris, Bendle, Pfeifer &amp; Reibstein (2010). <i>Marketing Metrics</i> (2nd ed.). Pearson — endossado pela MASB.</li>
-          <li>Fornell, Rust &amp; Dekimpe (2010). <i>J. Marketing Research</i>, 47(1).</li>
-          <li>Parasuraman, Zeithaml &amp; Berry (1988). SERVQUAL. <i>J. Retailing</i>, 64(1).</li>
-          <li>Kano, N. (1984). <i>Attractive Quality and Must-be Quality</i>.</li>
-          <li>Keiningham et al. (2007). <i>J. Marketing</i>, 71(3).</li>
-          <li>Anderson, Fornell &amp; Mazvancheryl (2004). <i>Customer Satisfaction and Shareholder Value</i>. J. Marketing, 68.</li>
+          <li>Heskett, J. L., Sasser, W. E., &amp; Schlesinger, L. A. (1994). <i>Putting the Service–Profit Chain to Work</i>. HBR, 72(2).</li>
+          <li>Farris, P., Bendle, N., Pfeifer, P., &amp; Reibstein, D. (2010). <i>Marketing Metrics</i> (2ª ed.). Pearson. [Endossado pela MASB.]</li>
+          <li>Fornell, C., Rust, R. T., &amp; Dekimpe, M. G. (2010). The Effect of Customer Satisfaction on Consumer Spending Growth. <i>Journal of Marketing Research</i>, 47(1).</li>
+          <li>Anderson, E. W., Fornell, C., &amp; Mazvancheryl, S. K. (2004). <i>Customer Satisfaction and Shareholder Value</i>. <i>Journal of Marketing</i>, 68(4).</li>
+          <li>Parasuraman, A., Zeithaml, V. A., &amp; Berry, L. L. (1988). SERVQUAL. <i>Journal of Retailing</i>, 64(1).</li>
+          <li>Cronin, J. J., &amp; Taylor, S. A. (1992). <i>Measuring Service Quality: A Reexamination and Extension</i>. J. Marketing, 56(3).</li>
+          <li>Kano, N., Seraku, N., Takahashi, F., &amp; Tsuji, S. (1984). <i>Attractive Quality and Must-be Quality</i>. Journal of the Japanese Society for Quality Control.</li>
+          <li>Keiningham, T. L., Cooil, B., Andreassen, T. W., &amp; Aksoy, L. (2007). A Longitudinal Examination of Net Promoter and Firm Revenue Growth. <i>J. Marketing</i>, 71(3).</li>
+          <li>Fader, P. S., Hardie, B. G. S., &amp; Lee, K. L. (2005). "Counting Your Customers" the Easy Way: An Alternative to the Pareto/NBD Model. <i>Marketing Science</i>, 24(2).</li>
+          <li>Schmittlein, D. C., Morrison, D. G., &amp; Colombo, R. (1987). Counting Your Customers: Who Are They and What Will They Do Next? <i>Management Science</i>, 33(1).</li>
+          <li>Carlzon, J. (1987). <i>Moments of Truth</i>. Ballinger.</li>
         </ul>
       </div>
     </section>
