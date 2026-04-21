@@ -629,3 +629,261 @@ function renderComparacao() {
     tbody.appendChild(tr);
   });
 }
+
+/* ============================================================
+   MODAL DE INFORMAÇÕES DOS KPIs
+   Biblioteca didática — cada indicador traz: sigla expandida,
+   definição, fórmula, como é calculado no site, benchmarks
+   e referência acadêmica.
+   ============================================================ */
+const INFO_KPI = {
+  enps: {
+    titulo: 'eNPS',
+    sigla: 'Employee Net Promoter Score',
+    definicao: 'Adaptação do NPS para medir a lealdade do funcionário. Pergunta: "Em escala 0–10, o quanto você recomendaria esta empresa como lugar para trabalhar?"',
+    formula: 'eNPS = %Promotores(9–10) − %Detratores(0–6)',
+    calculo: 'Usamos os campos <b>Func. promotores / neutros / detratores</b> da aba Dados. O total é a soma dos três; as proporções são aplicadas à fórmula.',
+    usa: ['Func. promotores (9–10)', 'Func. neutros (7–8)', 'Func. detratores (0–6)'],
+    bench: { ok: '≥ 30 (excelente)', warn: '10 a 29 (alerta)', bad: '< 10 (crítico)' },
+    fonte: 'Bain &amp; Company · adaptação do método Reichheld (HBR, 2003). É o primeiro elo da <i>Service–Profit Chain</i> (Heskett et al., HBR 1994).'
+  },
+  prod: {
+    titulo: 'Produtividade',
+    sigla: 'Receita por funcionário',
+    definicao: 'Mede a receita gerada por cada funcionário no período. Indicador clássico de eficiência operacional em varejo de serviços.',
+    formula: 'Produtividade = Receita total / Nº de funcionários',
+    calculo: 'Usamos <b>Receita total</b> dividida pelo <b>Nº de funcionários</b> do quadro.',
+    usa: ['Receita total', 'Nº de funcionários'],
+    bench: { ok: 'Benchmark setorial', warn: 'Abaixo do setor', bad: 'Baixa eficiência' },
+    fonte: 'Porter, <i>Competitive Strategy</i>; benchmarks específicos do setor (varejo brasileiro · IBGE/PNAD).'
+  },
+  nps: {
+    titulo: 'NPS',
+    sigla: 'Net Promoter Score',
+    definicao: 'Métrica de lealdade do cliente. Pergunta: "Em escala 0–10, o quanto você recomendaria nossa empresa a um amigo?"',
+    formula: 'NPS = %Promotores(9–10) − %Detratores(0–6)',
+    calculo: 'Soma-se <b>promotores + neutros + detratores</b>. Calcula-se as proporções e aplica-se a diferença. <b>Neutros não entram na conta final</b>, mas entram no denominador.',
+    usa: ['Promotores (9–10)', 'Neutros (7–8)', 'Detratores (0–6)'],
+    bench: { ok: '≥ 50 (world-class)', warn: '0 a 49 (aceitável)', bad: '< 0 (crítico)' },
+    fonte: 'Reichheld, F. F. (2003). <i>The One Number You Need to Grow</i>, <b>HBR</b> 81(12). Crítica: Keiningham et al. (<i>J. Marketing</i>, 2007).'
+  },
+  csat: {
+    titulo: 'CSAT',
+    sigla: 'Customer Satisfaction Score',
+    definicao: 'Percentual de clientes satisfeitos com um serviço, compra ou interação. Medida transacional (diferente do NPS, que é relacional).',
+    formula: 'CSAT = (Satisfeitos / Total) × 100',
+    calculo: 'Usamos <b>Satisfeitos (CSAT)</b> sobre <b>Total respostas CSAT</b>. Normalmente conta-se como "satisfeitos" quem respondeu 4–5 em escala de 5.',
+    usa: ['Satisfeitos (CSAT)', 'Total respostas CSAT'],
+    bench: { ok: '≥ 85%', warn: '75% a 84%', bad: '< 75%' },
+    fonte: '<b>ACSI</b> — American Customer Satisfaction Index · Fornell, Rust &amp; Dekimpe (<i>J. Marketing Research</i>, 2010). Correlaciona com ROI e valor da firma.'
+  },
+  retention: {
+    titulo: 'Retenção',
+    sigla: 'Customer Retention Rate (CRR)',
+    definicao: 'Percentual de clientes mantidos no período, excluindo os novos. Alavanca central do LTV — um ganho de 5 pp de retenção pode aumentar lucros em 25–95% (Reichheld, 1990).',
+    formula: 'Retenção = (Clientes finais − Novos) / Clientes iniciais × 100',
+    calculo: 'Usamos <b>Clientes finais − Novos clientes</b> para isolar a base original, dividindo por <b>Clientes iniciais</b>.',
+    usa: ['Clientes iniciais', 'Clientes finais', 'Novos clientes'],
+    bench: { ok: '≥ 85%', warn: '70% a 84%', bad: '< 70%' },
+    fonte: 'Farris, Bendle, Pfeifer &amp; Reibstein (2010). <i>Marketing Metrics</i>. Endossado pela MASB.'
+  },
+  churn: {
+    titulo: 'Churn',
+    sigla: 'Taxa de abandono de clientes',
+    definicao: 'Percentual de clientes que deixaram a base no período. É o <b>inverso da retenção</b>.',
+    formula: 'Churn = Clientes perdidos / Base média × 100',
+    calculo: 'Usamos <b>Clientes perdidos</b> sobre a base média <code>(iniciais + finais) / 2</code>, o que reduz viés em bases que crescem/encolhem rapidamente.',
+    usa: ['Clientes iniciais', 'Clientes finais', 'Clientes perdidos'],
+    bench: { ok: '≤ 5% (excelente)', warn: '5 a 10%', bad: '> 10%' },
+    fonte: 'Wikipedia: <i>Customer attrition</i>; Farris et al. (2010). Para bases muito dinâmicas, preferir análise por <b>cohorts</b>.'
+  },
+  lifespan: {
+    titulo: 'Tempo de vida do cliente',
+    sigla: 'Customer Lifespan',
+    definicao: 'Duração média do relacionamento de um cliente com a empresa, derivada matematicamente do churn.',
+    formula: 'Vida média = 1 / Churn anual',
+    calculo: 'Calculamos <code>100 / churn%</code>. Ex.: churn de 20% ⇒ vida média de 5 anos.',
+    usa: ['Churn (derivado)'],
+    bench: { ok: '≥ 5 anos', warn: '2 a 5 anos', bad: '< 2 anos' },
+    fonte: 'Farris et al. (2010). Pressuposto: churn constante (modelo geométrico).'
+  },
+  ltv: {
+    titulo: 'LTV (NPV)',
+    sigla: 'Customer Lifetime Value — Valor Presente Líquido',
+    definicao: 'Valor econômico presente de todos os lucros futuros esperados de um cliente. Fórmula NPV corrige pelo custo de capital — metodologia endossada pela MASB.',
+    formula: 'LTV = ARPU × Margem × [ r / (1 + d − r) ]',
+    calculo: 'Onde <b>r</b> = retenção em fração (ex.: 0,85), <b>d</b> = taxa de desconto em fração (ex.: 0,10), <b>Margem</b> = gross margin em fração. Se não houver retenção calculável, usamos fallback simples: <code>(ARPU × Margem) / Churn</code>.',
+    usa: ['ARPU (derivado)', 'Gross Margin', 'Retenção', 'Taxa de desconto anual'],
+    bench: { ok: 'Contexto-dependente', warn: 'Compare ao CAC', bad: 'LTV < CAC' },
+    fonte: 'Farris, Bendle, Pfeifer &amp; Reibstein (2010). <i>Marketing Metrics</i>, 2ª ed. MASB. A versão <code>Margem/Churn</code> (mais comum) tende a <b>superestimar</b> o LTV por ignorar o custo de capital.'
+  },
+  cac: {
+    titulo: 'CAC',
+    sigla: 'Customer Acquisition Cost',
+    definicao: 'Custo médio para adquirir um novo cliente, considerando investimentos em marketing e vendas.',
+    formula: 'CAC = (Marketing + Vendas) / Nº de novos clientes adquiridos',
+    calculo: 'Usamos o campo <b>Marketing + Vendas (R$)</b> dividido por <b>Clientes adquiridos</b>.',
+    usa: ['Marketing + Vendas (R$)', 'Clientes adquiridos'],
+    bench: { ok: 'CAC < LTV/3', warn: 'CAC ≈ LTV', bad: 'CAC > LTV' },
+    fonte: 'Bessemer Venture Partners · Harvard Business School. Avalie <b>sempre junto</b> com LTV e Payback.'
+  },
+  ltvcac: {
+    titulo: 'LTV / CAC',
+    sigla: 'Razão entre valor vitalício e custo de aquisição',
+    definicao: 'Indicador-chave de sustentabilidade do modelo de negócios. Responde: "Quantas vezes cada real investido em aquisição retorna em valor do cliente?"',
+    formula: 'LTV / CAC',
+    calculo: 'Divisão direta entre os dois indicadores já calculados.',
+    usa: ['LTV', 'CAC'],
+    bench: { ok: '≥ 3 (ideal Harvard/MIT)', warn: '1 a 3 (aceitável)', bad: '< 1 (queima caixa)' },
+    fonte: 'David Skok (Matrix Partners); Harvard Business School; Bessemer Cloud Index. Ratio > 5 pode indicar subinvestimento em crescimento.'
+  },
+  payback: {
+    titulo: 'CAC Payback',
+    sigla: 'Tempo de recuperação do CAC',
+    definicao: 'Em quantos meses o lucro gerado por um cliente novo recupera o investimento de aquisição. Impacta capital de giro diretamente.',
+    formula: 'CAC Payback = CAC / (ARPU mensal × Margem)',
+    calculo: 'Convertemos ARPU anual em mensal (÷ 12), multiplicamos pela margem bruta e dividimos CAC pelo resultado.',
+    usa: ['CAC', 'ARPU', 'Gross Margin'],
+    bench: { ok: '≤ 12 meses', warn: '12 a 18 meses', bad: '> 18 meses' },
+    fonte: 'Bessemer Venture Partners. Benchmark SaaS: ≤ 12m; B2C com contrato: ≤ 18m.'
+  },
+  arpu: {
+    titulo: 'ARPU',
+    sigla: 'Average Revenue Per User',
+    definicao: 'Receita média gerada por cliente ativo no período. Base para cálculo de LTV e Payback.',
+    formula: 'ARPU = Receita total / Base média de clientes',
+    calculo: 'Usamos <b>Receita total</b> dividida pela base média <code>(clientes iniciais + finais) / 2</code>.',
+    usa: ['Receita total', 'Clientes iniciais', 'Clientes finais'],
+    bench: { ok: 'Contexto-dependente', warn: 'Compare ao setor', bad: 'Em queda' },
+    fonte: 'Farris et al. (2010). Amplamente usado em telecom, SaaS e varejo com base recorrente.'
+  },
+  ticket: {
+    titulo: 'Ticket Médio',
+    sigla: 'Valor médio por transação',
+    definicao: 'Valor médio de cada venda/transação. Difere do ARPU: ticket é por <b>venda</b>, ARPU é por <b>cliente</b>.',
+    formula: 'Ticket médio = Receita total / Nº de vendas',
+    calculo: 'Divisão direta: <b>Receita total</b> por <b>Número de vendas</b>.',
+    usa: ['Receita total', 'Número de vendas'],
+    bench: { ok: 'Contexto-dependente', warn: 'Compare ao setor', bad: '—' },
+    fonte: 'Métrica clássica de varejo. Alavancas: cross-sell, bundling, premium mix.'
+  },
+  gm: {
+    titulo: 'Gross Margin',
+    sigla: 'Margem Bruta (%)',
+    definicao: 'Percentual da receita que sobra após custos diretos dos serviços prestados (COGS). Determina capacidade de investir em aquisição e retenção.',
+    formula: 'Gross Margin = (Receita − COGS) / Receita × 100',
+    calculo: 'Se <b>COGS</b> for informado, calculamos dele. Caso contrário, usamos o campo <b>Margem bruta (%)</b> informado manualmente.',
+    usa: ['Receita', 'COGS (ou Margem %)'],
+    bench: { ok: '≥ 40% (serviços)', warn: '20% a 40%', bad: '< 20%' },
+    fonte: 'Relatórios S&amp;P 500 por setor; Damodaran (NYU Stern). Serviços especializados: 50–70%; varejo: 25–45%.'
+  },
+  nrr: {
+    titulo: 'NRR',
+    sigla: 'Net Revenue Retention',
+    definicao: 'Quanto da receita da base existente foi mantida, incluindo upsell/cross-sell e descontando churn e downsell. Indicador-chave de expansão orgânica.',
+    formula: 'NRR = Receita atual / Receita período anterior × 100',
+    calculo: 'Divisão direta entre <b>Receita total</b> e <b>Receita período anterior</b>.',
+    usa: ['Receita atual', 'Receita período anterior'],
+    bench: { ok: '≥ 110% (best-in-class)', warn: '100% a 110%', bad: '< 100%' },
+    fonte: 'Padrão SaaS · Bessemer State of the Cloud. NRR > 100% = "negative churn" (expansão supera perda).'
+  },
+  revchurn: {
+    titulo: 'Revenue Churn',
+    sigla: 'Taxa de abandono de receita',
+    definicao: 'Percentual de receita perdida da base no período. Complementa o Customer Churn pois pondera pelo <b>valor</b> dos clientes perdidos.',
+    formula: 'Revenue Churn = max(0, 1 − NRR/100) × 100',
+    calculo: 'Derivado do NRR. Se NRR ≥ 100% (expansão), Revenue Churn = 0.',
+    usa: ['NRR (derivado)'],
+    bench: { ok: '≤ 5%', warn: '5% a 10%', bad: '> 10%' },
+    fonte: 'Bessemer Venture Partners · SaaS benchmarks.'
+  },
+  conv: {
+    titulo: 'Conversão',
+    sigla: 'Taxa de conversão de atendimentos em vendas',
+    definicao: 'Eficiência comercial do atendimento — quantos contatos viram venda.',
+    formula: 'Conversão = Vendas / Atendimentos × 100',
+    calculo: 'Divisão direta entre <b>Número de vendas</b> e <b>Nº de atendimentos</b>.',
+    usa: ['Número de vendas', 'Nº de atendimentos'],
+    bench: { ok: '≥ 25%', warn: '15% a 25%', bad: '< 15%' },
+    fonte: 'Benchmarks de varejo de serviços (SBVC, NRF). Alavancas: treinamento, script consultivo, qualidade do tráfego.'
+  },
+  fcr: {
+    titulo: 'FCR',
+    sigla: 'First Call Resolution',
+    definicao: 'Percentual de problemas resolvidos já no primeiro contato, sem escalonamento nem retrabalho. Impacto duplo: reduz custo operacional <b>e</b> eleva CSAT.',
+    formula: 'FCR = Resolvidos no 1º contato / Total de problemas × 100',
+    calculo: 'Divisão direta: <b>Resolvidos no 1º contato</b> por <b>Total de problemas</b>.',
+    usa: ['Resolvidos no 1º contato', 'Total de problemas'],
+    bench: { ok: '≥ 75% (excelente)', warn: '65% a 74%', bad: '< 65%' },
+    fonte: '<b>SQM Group</b> — benchmark global de contact centers. Cada 1% de FCR = ~1% de aumento em CSAT.'
+  },
+  tempo: {
+    titulo: 'Tempo Médio de Atendimento',
+    sigla: 'Average Handle Time (AHT)',
+    definicao: 'Duração média de cada atendimento. Cuidado: tempo muito baixo pode prejudicar qualidade; muito alto pode indicar ineficiência.',
+    formula: 'AHT = Tempo total / Nº de atendimentos',
+    calculo: 'Divisão direta entre <b>Tempo total atendimento (min)</b> e <b>Nº de atendimentos</b>.',
+    usa: ['Tempo total atendimento (min)', 'Nº de atendimentos'],
+    bench: { ok: 'Benchmark interno', warn: '+20% vs meta', bad: '+50% vs meta' },
+    fonte: 'ContactBabel · SQM. Deve ser analisado <b>junto</b> com FCR e CSAT (não isoladamente).'
+  }
+};
+
+function abrirInfo(kpiKey) {
+  const info = INFO_KPI[kpiKey];
+  if (!info) return;
+  document.getElementById('modal-titulo').textContent = info.titulo;
+  document.getElementById('modal-sigla').innerHTML = info.sigla || '';
+  const body = document.getElementById('modal-body');
+  const campos = info.usa.map(u => `<li>${u}</li>`).join('');
+  body.innerHTML = `
+    <h4>O que é</h4>
+    <p>${info.definicao}</p>
+
+    <h4>Fórmula</h4>
+    <div class="formula-block">${info.formula}</div>
+
+    <h4>Como é calculado aqui</h4>
+    <p>${info.calculo}</p>
+
+    <h4>Campos usados</h4>
+    <ul>${campos}</ul>
+
+    <h4>Benchmarks (semáforo)</h4>
+    <div class="bench-box">
+      <div class="ok-box"><b>Verde</b>${info.bench.ok}</div>
+      <div class="warn-box"><b>Amarelo</b>${info.bench.warn}</div>
+      <div class="bad-box"><b>Vermelho</b>${info.bench.bad}</div>
+    </div>
+
+    <p class="src"><b>Referência:</b> ${info.fonte}</p>
+  `;
+  const modal = document.getElementById('modal-info');
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+}
+
+function fecharInfo() {
+  const modal = document.getElementById('modal-info');
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+}
+
+// Delegação de evento: qualquer botão .info-btn abre o modal
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.info-btn');
+  if (btn) {
+    e.preventDefault();
+    e.stopPropagation();
+    abrirInfo(btn.dataset.info);
+    return;
+  }
+  if (e.target.matches('[data-close="1"]')) {
+    fecharInfo();
+  }
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') fecharInfo();
+});
