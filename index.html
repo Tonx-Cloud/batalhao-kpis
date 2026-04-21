@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Simulador de KPIs de Gestão de Varejo de Serviços - Padrão Harvard / MIT / LBS" />
+  <meta name="description" content="Simulador de KPIs de Varejo de Serviços · Framework Harvard / MIT Sloan / LBS · Service–Profit Chain · NPV-based LTV" />
   <title>Retail Service KPIs · Dr. Batalhão</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -16,15 +16,17 @@
       <div class="brand">
         <div class="brand-mark">B</div>
         <div>
-          <h1>Retail Service KPIs</h1>
-          <p class="subtitle">Gestão de Varejo de Serviços · Framework Harvard / MIT / LBS</p>
+          <h1>Retail Service KPIs <span class="ver">v2.0</span></h1>
+          <p class="subtitle">Framework Harvard · MIT Sloan · LBS · Service–Profit Chain</p>
         </div>
       </div>
       <nav class="tabs" role="tablist">
         <button class="tab active" data-tab="dashboard">Dashboard</button>
-        <button class="tab" data-tab="input">Entrada de Dados</button>
+        <button class="tab" data-tab="input">Dados</button>
         <button class="tab" data-tab="resultados">Resultados</button>
         <button class="tab" data-tab="diagnostico">Diagnóstico</button>
+        <button class="tab" data-tab="sensibilidade">Sensibilidade</button>
+        <button class="tab" data-tab="comparar">Comparar</button>
         <button class="tab" data-tab="teoria">Teoria</button>
       </nav>
     </div>
@@ -35,193 +37,137 @@
     <section id="dashboard" class="view active">
       <div class="hero">
         <h2>Painel Executivo</h2>
-        <p>Indicadores-chave do seu estudo de caso. Preencha os dados na aba <b>Entrada de Dados</b> para calcular automaticamente.</p>
+        <p>18 indicadores organizados em 4 camadas (Funcionário · Cliente · Financeira · Operacional). Preencha os dados em <b>Dados</b>.</p>
       </div>
 
+      <h3 class="layer-title">🧑‍💼 Camada do Funcionário <small>(Service–Profit Chain · Heskett et al., 1994)</small></h3>
       <div class="grid kpi-grid">
-        <div class="card kpi" data-kpi="nps">
-          <div class="kpi-label">NPS <span class="hint" title="Net Promoter Score = %Promotores − %Detratores">ⓘ</span></div>
-          <div class="kpi-value" id="kpi-nps">—</div>
-          <div class="kpi-status" id="status-nps">Aguardando dados</div>
-        </div>
-        <div class="card kpi" data-kpi="csat">
-          <div class="kpi-label">CSAT <span class="hint" title="Customer Satisfaction Score">ⓘ</span></div>
-          <div class="kpi-value" id="kpi-csat">—</div>
-          <div class="kpi-status" id="status-csat">Aguardando dados</div>
-        </div>
-        <div class="card kpi" data-kpi="retention">
-          <div class="kpi-label">Retenção</div>
-          <div class="kpi-value" id="kpi-retention">—</div>
-          <div class="kpi-status" id="status-retention">Aguardando dados</div>
-        </div>
-        <div class="card kpi" data-kpi="churn">
-          <div class="kpi-label">Churn</div>
-          <div class="kpi-value" id="kpi-churn">—</div>
-          <div class="kpi-status" id="status-churn">Aguardando dados</div>
-        </div>
-        <div class="card kpi" data-kpi="ltv">
-          <div class="kpi-label">LTV <span class="hint" title="Customer Lifetime Value">ⓘ</span></div>
-          <div class="kpi-value" id="kpi-ltv">—</div>
-          <div class="kpi-status" id="status-ltv">Aguardando dados</div>
-        </div>
-        <div class="card kpi" data-kpi="cac">
-          <div class="kpi-label">CAC</div>
-          <div class="kpi-value" id="kpi-cac">—</div>
-          <div class="kpi-status" id="status-cac">Aguardando dados</div>
-        </div>
-        <div class="card kpi" data-kpi="ltvcac">
-          <div class="kpi-label">LTV / CAC <span class="hint" title="Regra Harvard/MIT: ideal ≥ 3">ⓘ</span></div>
-          <div class="kpi-value" id="kpi-ltvcac">—</div>
-          <div class="kpi-status" id="status-ltvcac">Aguardando dados</div>
-        </div>
-        <div class="card kpi" data-kpi="ticket">
-          <div class="kpi-label">Ticket Médio</div>
-          <div class="kpi-value" id="kpi-ticket">—</div>
-          <div class="kpi-status" id="status-ticket">Aguardando dados</div>
-        </div>
-        <div class="card kpi" data-kpi="conv">
-          <div class="kpi-label">Conversão</div>
-          <div class="kpi-value" id="kpi-conv">—</div>
-          <div class="kpi-status" id="status-conv">Aguardando dados</div>
-        </div>
-        <div class="card kpi" data-kpi="fcr">
-          <div class="kpi-label">FCR</div>
-          <div class="kpi-value" id="kpi-fcr">—</div>
-          <div class="kpi-status" id="status-fcr">Aguardando dados</div>
-        </div>
-        <div class="card kpi" data-kpi="tempo">
-          <div class="kpi-label">Tempo Médio</div>
-          <div class="kpi-value" id="kpi-tempo">—</div>
-          <div class="kpi-status" id="status-tempo">Aguardando dados</div>
-        </div>
-        <div class="card kpi" data-kpi="prod">
-          <div class="kpi-label">Produtividade</div>
-          <div class="kpi-value" id="kpi-prod">—</div>
-          <div class="kpi-status" id="status-prod">Aguardando dados</div>
-        </div>
+        <div class="card kpi" data-kpi="enps"><div class="kpi-label">eNPS <span class="hint" title="Employee Net Promoter Score">ⓘ</span></div><div class="kpi-value" id="kpi-enps">—</div><div class="kpi-status" id="status-enps">—</div></div>
+        <div class="card kpi" data-kpi="prod"><div class="kpi-label">Produtividade</div><div class="kpi-value" id="kpi-prod">—</div><div class="kpi-status" id="status-prod">—</div></div>
+      </div>
+
+      <h3 class="layer-title">🟦 Camada do Cliente</h3>
+      <div class="grid kpi-grid">
+        <div class="card kpi" data-kpi="nps"><div class="kpi-label">NPS <span class="hint" title="%Promotores − %Detratores (Reichheld, HBR 2003)">ⓘ</span></div><div class="kpi-value" id="kpi-nps">—</div><div class="kpi-status" id="status-nps">—</div></div>
+        <div class="card kpi" data-kpi="csat"><div class="kpi-label">CSAT</div><div class="kpi-value" id="kpi-csat">—</div><div class="kpi-status" id="status-csat">—</div></div>
+        <div class="card kpi" data-kpi="retention"><div class="kpi-label">Retenção</div><div class="kpi-value" id="kpi-retention">—</div><div class="kpi-status" id="status-retention">—</div></div>
+        <div class="card kpi" data-kpi="churn"><div class="kpi-label">Churn (clientes)</div><div class="kpi-value" id="kpi-churn">—</div><div class="kpi-status" id="status-churn">—</div></div>
+        <div class="card kpi" data-kpi="lifespan"><div class="kpi-label">Tempo de vida <span class="hint" title="1 / Churn anual">ⓘ</span></div><div class="kpi-value" id="kpi-lifespan">—</div><div class="kpi-status" id="status-lifespan">—</div></div>
+      </div>
+
+      <h3 class="layer-title">🟩 Camada Financeira</h3>
+      <div class="grid kpi-grid">
+        <div class="card kpi" data-kpi="ltv"><div class="kpi-label">LTV (NPV) <span class="hint" title="Margin × Retention / (1 + Discount − Retention) · Farris/MASB">ⓘ</span></div><div class="kpi-value" id="kpi-ltv">—</div><div class="kpi-status" id="status-ltv">—</div></div>
+        <div class="card kpi" data-kpi="cac"><div class="kpi-label">CAC</div><div class="kpi-value" id="kpi-cac">—</div><div class="kpi-status" id="status-cac">—</div></div>
+        <div class="card kpi" data-kpi="ltvcac"><div class="kpi-label">LTV / CAC <span class="hint" title="Ideal ≥ 3 · Harvard/MIT">ⓘ</span></div><div class="kpi-value" id="kpi-ltvcac">—</div><div class="kpi-status" id="status-ltvcac">—</div></div>
+        <div class="card kpi" data-kpi="payback"><div class="kpi-label">CAC Payback <span class="hint" title="Meses para recuperar CAC">ⓘ</span></div><div class="kpi-value" id="kpi-payback">—</div><div class="kpi-status" id="status-payback">—</div></div>
+        <div class="card kpi" data-kpi="arpu"><div class="kpi-label">ARPU</div><div class="kpi-value" id="kpi-arpu">—</div><div class="kpi-status" id="status-arpu">—</div></div>
+        <div class="card kpi" data-kpi="ticket"><div class="kpi-label">Ticket Médio</div><div class="kpi-value" id="kpi-ticket">—</div><div class="kpi-status" id="status-ticket">—</div></div>
+        <div class="card kpi" data-kpi="gm"><div class="kpi-label">Gross Margin %</div><div class="kpi-value" id="kpi-gm">—</div><div class="kpi-status" id="status-gm">—</div></div>
+        <div class="card kpi" data-kpi="nrr"><div class="kpi-label">NRR <span class="hint" title="Net Revenue Retention">ⓘ</span></div><div class="kpi-value" id="kpi-nrr">—</div><div class="kpi-status" id="status-nrr">—</div></div>
+        <div class="card kpi" data-kpi="revchurn"><div class="kpi-label">Revenue Churn</div><div class="kpi-value" id="kpi-revchurn">—</div><div class="kpi-status" id="status-revchurn">—</div></div>
+      </div>
+
+      <h3 class="layer-title">🟧 Camada Operacional</h3>
+      <div class="grid kpi-grid">
+        <div class="card kpi" data-kpi="conv"><div class="kpi-label">Conversão</div><div class="kpi-value" id="kpi-conv">—</div><div class="kpi-status" id="status-conv">—</div></div>
+        <div class="card kpi" data-kpi="fcr"><div class="kpi-label">FCR</div><div class="kpi-value" id="kpi-fcr">—</div><div class="kpi-status" id="status-fcr">—</div></div>
+        <div class="card kpi" data-kpi="tempo"><div class="kpi-label">Tempo Médio</div><div class="kpi-value" id="kpi-tempo">—</div><div class="kpi-status" id="status-tempo">—</div></div>
       </div>
 
       <div class="grid two-cols">
-        <div class="card">
-          <h3>Camadas do Framework</h3>
-          <div class="layers">
-            <div class="layer">
-              <h4>🟦 Customer Layer</h4>
-              <ul><li>NPS</li><li>CSAT</li><li>Retenção</li></ul>
-            </div>
-            <div class="layer">
-              <h4>🟩 Financial Layer</h4>
-              <ul><li>LTV</li><li>Ticket médio</li><li>CAC</li></ul>
-            </div>
-            <div class="layer">
-              <h4>🟧 Operational Layer</h4>
-              <ul><li>Tempo de serviço</li><li>FCR</li><li>Conversão</li></ul>
-            </div>
+        <div class="card service-chain">
+          <h3>Service–Profit Chain (HBR, 1994)</h3>
+          <div class="chain">
+            <div class="chain-box">Satisfação do<br>Funcionário</div><span class="arrow">→</span>
+            <div class="chain-box">Qualidade do<br>Serviço Interno</div><span class="arrow">→</span>
+            <div class="chain-box">Valor Percebido<br>pelo Cliente</div><span class="arrow">→</span>
+            <div class="chain-box">Satisfação e<br>Lealdade</div><span class="arrow">→</span>
+            <div class="chain-box highlight">Crescimento<br>& Lucro</div>
           </div>
+          <p class="muted">Heskett, Sasser &amp; Schlesinger (1994). <i>Putting the Service–Profit Chain to Work</i>, Harvard Business Review.</p>
         </div>
         <div class="card">
           <h3>Insight-chave</h3>
-          <blockquote class="quote">
-            “Não se gerencia varejo de serviços apenas com vendas, mas com <b>valor do cliente ao longo do tempo</b>.”
-          </blockquote>
-          <p class="muted">Baseado na literatura de Harvard Business School, MIT Sloan e London Business School.</p>
+          <blockquote class="quote">“Não se gerencia varejo de serviços apenas com vendas, mas com <b>valor do cliente ao longo do tempo</b>.”</blockquote>
+          <p class="muted">Fred Reichheld · <i>The Ultimate Question 2.0</i>, HBR Press, 2011.</p>
+          <div class="actions">
+            <button type="button" class="btn" id="btn-export-csv">⬇ Exportar CSV</button>
+            <button type="button" class="btn" id="btn-export-json">⬇ Exportar JSON</button>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- INPUT -->
+    <!-- DADOS -->
     <section id="input" class="view">
       <div class="hero">
         <h2>Entrada de Dados do Estudo de Caso</h2>
-        <p>Insira os valores do exercício. Todos os cálculos seguem as fórmulas do framework Harvard/MIT/LBS.</p>
+        <p>Fórmulas baseadas em <i>Marketing Metrics</i> (Farris, Bendle, Pfeifer &amp; Reibstein, 2010) — padrão endossado pela MASB.</p>
       </div>
 
       <form id="form-kpi" class="card form">
         <fieldset>
           <legend>👥 Base de clientes</legend>
           <div class="grid two-cols-form">
-            <label>Clientes iniciais
-              <input type="number" min="0" step="any" name="clientesIniciais" placeholder="Ex.: 1000" />
-            </label>
-            <label>Clientes finais
-              <input type="number" min="0" step="any" name="clientesFinais" placeholder="Ex.: 1100" />
-            </label>
-            <label>Novos clientes no período
-              <input type="number" min="0" step="any" name="novosClientes" placeholder="Ex.: 250" />
-            </label>
-            <label>Clientes perdidos
-              <input type="number" min="0" step="any" name="clientesPerdidos" placeholder="Ex.: 150" />
-            </label>
+            <label>Clientes iniciais <input type="number" min="0" step="any" name="clientesIniciais" placeholder="Ex.: 1000" /></label>
+            <label>Clientes finais <input type="number" min="0" step="any" name="clientesFinais" placeholder="Ex.: 1100" /></label>
+            <label>Novos clientes <input type="number" min="0" step="any" name="novosClientes" placeholder="Ex.: 250" /></label>
+            <label>Clientes perdidos <input type="number" min="0" step="any" name="clientesPerdidos" placeholder="Ex.: 150" /></label>
           </div>
         </fieldset>
 
         <fieldset>
           <legend>💰 Financeiro</legend>
           <div class="grid two-cols-form">
-            <label>Receita total (R$)
-              <input type="number" min="0" step="any" name="receita" placeholder="Ex.: 500000" />
-            </label>
-            <label>Número de vendas
-              <input type="number" min="0" step="any" name="vendas" placeholder="Ex.: 2000" />
-            </label>
-            <label>Margem (%)
-              <input type="number" min="0" max="100" step="any" name="margem" placeholder="Ex.: 25" />
-            </label>
-            <label>Investimento em marketing (R$)
-              <input type="number" min="0" step="any" name="marketing" placeholder="Ex.: 50000" />
-            </label>
-            <label>Clientes adquiridos (pelo marketing)
-              <input type="number" min="0" step="any" name="clientesAdquiridos" placeholder="Ex.: 250" />
-            </label>
-            <label>Nº de funcionários
-              <input type="number" min="0" step="any" name="funcionarios" placeholder="Ex.: 20" />
-            </label>
+            <label>Receita total (R$) <input type="number" min="0" step="any" name="receita" placeholder="Ex.: 500000" /></label>
+            <label>Receita período anterior (R$) <input type="number" min="0" step="any" name="receitaAnterior" placeholder="Para NRR / Rev. Churn" /></label>
+            <label>Número de vendas <input type="number" min="0" step="any" name="vendas" placeholder="Ex.: 2000" /></label>
+            <label>COGS — custo dos serviços (R$) <input type="number" min="0" step="any" name="cogs" placeholder="Ex.: 375000" /></label>
+            <label>Margem bruta (%) — opcional <input type="number" min="0" max="100" step="any" name="margem" placeholder="Ex.: 25" /></label>
+            <label>Taxa de desconto anual (%) — NPV <input type="number" min="0" max="100" step="any" name="desconto" placeholder="Ex.: 10" value="10" /></label>
+            <label>Marketing + Vendas (R$) <input type="number" min="0" step="any" name="marketing" placeholder="Ex.: 50000" /></label>
+            <label>Clientes adquiridos <input type="number" min="0" step="any" name="clientesAdquiridos" placeholder="Ex.: 250" /></label>
+            <label>Nº de funcionários <input type="number" min="0" step="any" name="funcionarios" placeholder="Ex.: 20" /></label>
           </div>
         </fieldset>
 
         <fieldset>
           <legend>⚙️ Operação</legend>
           <div class="grid two-cols-form">
-            <label>Nº de atendimentos
-              <input type="number" min="0" step="any" name="atendimentos" placeholder="Ex.: 3000" />
-            </label>
-            <label>Tempo total de atendimento (min)
-              <input type="number" min="0" step="any" name="tempoTotal" placeholder="Ex.: 18000" />
-            </label>
-            <label>Problemas resolvidos no 1º contato
-              <input type="number" min="0" step="any" name="fcrResolvidos" placeholder="Ex.: 2100" />
-            </label>
-            <label>Total de problemas
-              <input type="number" min="0" step="any" name="fcrTotal" placeholder="Ex.: 3000" />
-            </label>
+            <label>Nº de atendimentos <input type="number" min="0" step="any" name="atendimentos" placeholder="Ex.: 3000" /></label>
+            <label>Tempo total atendimento (min) <input type="number" min="0" step="any" name="tempoTotal" placeholder="Ex.: 18000" /></label>
+            <label>Resolvidos no 1º contato <input type="number" min="0" step="any" name="fcrResolvidos" placeholder="Ex.: 2100" /></label>
+            <label>Total de problemas <input type="number" min="0" step="any" name="fcrTotal" placeholder="Ex.: 3000" /></label>
           </div>
         </fieldset>
 
         <fieldset>
-          <legend>⭐ Pesquisa NPS & CSAT</legend>
+          <legend>⭐ Pesquisa NPS & CSAT (Clientes)</legend>
           <div class="grid two-cols-form">
-            <label>Promotores (notas 9–10)
-              <input type="number" min="0" step="any" name="promotores" placeholder="Ex.: 120" />
-            </label>
-            <label>Neutros (7–8)
-              <input type="number" min="0" step="any" name="neutros" placeholder="Ex.: 60" />
-            </label>
-            <label>Detratores (0–6)
-              <input type="number" min="0" step="any" name="detratores" placeholder="Ex.: 20" />
-            </label>
-            <label>Clientes satisfeitos (CSAT)
-              <input type="number" min="0" step="any" name="csatSatisfeitos" placeholder="Ex.: 180" />
-            </label>
-            <label>Total de respostas CSAT
-              <input type="number" min="0" step="any" name="csatTotal" placeholder="Ex.: 200" />
-            </label>
+            <label>Promotores (9–10) <input type="number" min="0" step="any" name="promotores" placeholder="Ex.: 120" /></label>
+            <label>Neutros (7–8) <input type="number" min="0" step="any" name="neutros" placeholder="Ex.: 60" /></label>
+            <label>Detratores (0–6) <input type="number" min="0" step="any" name="detratores" placeholder="Ex.: 20" /></label>
+            <label>Satisfeitos (CSAT) <input type="number" min="0" step="any" name="csatSatisfeitos" placeholder="Ex.: 180" /></label>
+            <label>Total respostas CSAT <input type="number" min="0" step="any" name="csatTotal" placeholder="Ex.: 200" /></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>🧑‍💼 eNPS (Funcionários) — Service–Profit Chain</legend>
+          <div class="grid two-cols-form">
+            <label>Func. promotores <input type="number" min="0" step="any" name="empPromotores" placeholder="Ex.: 10" /></label>
+            <label>Func. neutros <input type="number" min="0" step="any" name="empNeutros" placeholder="Ex.: 7" /></label>
+            <label>Func. detratores <input type="number" min="0" step="any" name="empDetratores" placeholder="Ex.: 3" /></label>
           </div>
         </fieldset>
 
         <div class="actions">
           <button type="submit" class="btn primary">Calcular indicadores</button>
-          <button type="button" class="btn" id="btn-exemplo">Preencher com exemplo</button>
-          <button type="reset" class="btn ghost" id="btn-limpar">Limpar</button>
+          <button type="button" class="btn" id="btn-exemplo">📋 Exemplo didático</button>
+          <button type="button" class="btn" id="btn-salvar-a">💾 Salvar como Cenário A</button>
+          <button type="button" class="btn" id="btn-salvar-b">💾 Salvar como Cenário B</button>
+          <button type="reset" class="btn ghost">Limpar</button>
         </div>
       </form>
     </section>
@@ -230,35 +176,21 @@
     <section id="resultados" class="view">
       <div class="hero">
         <h2>Resultados & Gráficos</h2>
-        <p>Visualização dos KPIs com semáforo de performance.</p>
+        <p>KPIs com semáforo baseado em benchmarks publicados (Bain, ACSI, HBS).</p>
       </div>
 
       <div class="grid two-cols">
-        <div class="card">
-          <h3>Camada do Cliente</h3>
-          <canvas id="chart-customer" height="220"></canvas>
-        </div>
-        <div class="card">
-          <h3>Camada Financeira</h3>
-          <canvas id="chart-financial" height="220"></canvas>
-        </div>
-        <div class="card">
-          <h3>Camada Operacional</h3>
-          <canvas id="chart-operational" height="220"></canvas>
-        </div>
-        <div class="card">
-          <h3>Composição NPS</h3>
-          <canvas id="chart-nps" height="220"></canvas>
-        </div>
+        <div class="card"><h3>Camada Cliente</h3><canvas id="chart-customer" height="220"></canvas></div>
+        <div class="card"><h3>Camada Financeira</h3><canvas id="chart-financial" height="220"></canvas></div>
+        <div class="card"><h3>Camada Operacional</h3><canvas id="chart-operational" height="220"></canvas></div>
+        <div class="card"><h3>Composição NPS</h3><canvas id="chart-nps" height="220"></canvas></div>
       </div>
 
       <div class="card">
         <h3>Tabela consolidada</h3>
         <div class="table-wrap">
           <table id="tabela-resultados">
-            <thead>
-              <tr><th>Indicador</th><th>Valor</th><th>Fórmula</th><th>Status</th></tr>
-            </thead>
+            <thead><tr><th>Indicador</th><th>Valor</th><th>Fórmula</th><th>Benchmark</th><th>Status</th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
@@ -269,64 +201,174 @@
     <section id="diagnostico" class="view">
       <div class="hero">
         <h2>Diagnóstico Inteligente</h2>
-        <p>Recomendações gerenciais automáticas com base nos KPIs calculados.</p>
+        <p>Recomendações gerenciais automáticas com base no encadeamento <i>Service–Profit Chain</i>.</p>
       </div>
       <div id="diagnostico-lista" class="diagnostico">
-        <div class="card muted">Preencha os dados e clique em <b>Calcular indicadores</b> para ver o diagnóstico.</div>
+        <div class="card muted">Preencha os dados e clique em <b>Calcular</b> para ver o diagnóstico.</div>
+      </div>
+    </section>
+
+    <!-- SENSIBILIDADE -->
+    <section id="sensibilidade" class="view">
+      <div class="hero">
+        <h2>Análise de Sensibilidade (What-if)</h2>
+        <p>Ferramenta estilo "caso Harvard": quanto o <b>LTV</b> muda se você variar <b>retenção</b>, <b>margem</b> ou <b>taxa de desconto</b>?</p>
+      </div>
+      <div class="card">
+        <div class="sliders">
+          <label>Retenção: <b><span id="s-ret-v">80</span>%</b>
+            <input type="range" id="s-ret" min="0" max="100" step="1" value="80" />
+          </label>
+          <label>Margem bruta: <b><span id="s-margem-v">25</span>%</b>
+            <input type="range" id="s-margem" min="0" max="100" step="1" value="25" />
+          </label>
+          <label>Taxa de desconto: <b><span id="s-desc-v">10</span>%</b>
+            <input type="range" id="s-desc" min="0" max="30" step="0.5" value="10" />
+          </label>
+          <label>ARPU (R$): <b><span id="s-arpu-v">500</span></b>
+            <input type="range" id="s-arpu" min="0" max="10000" step="10" value="500" />
+          </label>
+        </div>
+        <div class="sens-result">
+          <div><span class="muted">LTV projetado</span><div class="big" id="s-ltv">—</div></div>
+          <div><span class="muted">Vida média</span><div class="big" id="s-life">—</div></div>
+          <div><span class="muted">Multiplicador sobre ARPU</span><div class="big" id="s-mult">—</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Curva LTV × Retenção</h3>
+        <canvas id="chart-sens" height="220"></canvas>
+        <p class="muted">Base: LTV = ARPU × Margem × [ r / (1 + d − r) ]. Fonte: Farris et al., <i>Marketing Metrics</i> (2010); método endossado pela MASB.</p>
+      </div>
+    </section>
+
+    <!-- COMPARAR -->
+    <section id="comparar" class="view">
+      <div class="hero">
+        <h2>Comparador de Cenários A × B</h2>
+        <p>Padrão pedagógico Harvard: compare duas empresas, filiais ou períodos. Use os botões <b>💾 Salvar como Cenário A/B</b> na aba Dados.</p>
+      </div>
+      <div class="card">
+        <div class="table-wrap">
+          <table id="tabela-compare">
+            <thead><tr><th>Indicador</th><th>Cenário A</th><th>Cenário B</th><th>Δ (B − A)</th><th>Vencedor</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn" id="btn-limpar-cenarios">🗑 Limpar cenários salvos</button>
+        </div>
       </div>
     </section>
 
     <!-- TEORIA -->
     <section id="teoria" class="view">
       <div class="hero">
-        <h2>Referencial Teórico</h2>
-        <p>Fórmulas e lógica gerencial segundo Harvard / MIT Sloan / London Business School.</p>
+        <h2>Referencial Teórico Ampliado</h2>
+        <p>Fórmulas + modelos complementares usados nas melhores escolas de negócios.</p>
       </div>
 
       <div class="grid two-cols">
         <div class="card">
-          <h3>1. Indicadores Centrais (Core KPIs)</h3>
-          <ul class="formula-list">
-            <li><b>NPS</b> = %Promotores − %Detratores <span class="src">Reichheld · Harvard</span></li>
-            <li><b>CSAT</b> = (satisfeitos / total de respostas) × 100</li>
-            <li><b>Retenção</b> = ((Finais − Novos) / Iniciais) × 100</li>
-            <li><b>Churn</b> = (Perdidos / Totais) × 100</li>
-            <li><b>LTV</b> = (Receita média × Margem) / Churn</li>
-          </ul>
+          <h3>1. NPS — Reichheld (HBR, 2003)</h3>
+          <p class="formula-block">NPS = %Promotores − %Detratores</p>
+          <p class="muted">Escala 0–10. Promotores (9–10), Neutros (7–8), Detratores (0–6). <b>Crítica:</b> Keiningham et al. (<i>J. Marketing</i>, 2007) mostram que a correlação com crescimento não é consistentemente superior ao CSAT.</p>
         </div>
         <div class="card">
-          <h3>2. Indicadores Operacionais</h3>
-          <ul class="formula-list">
-            <li><b>Tempo médio</b> = Σ tempo / nº atendimentos</li>
-            <li><b>FCR</b> = resolvidos no 1º contato / total de problemas</li>
-            <li><b>Conversão</b> = (vendas / atendimentos) × 100</li>
-            <li><b>Ticket médio</b> = receita / nº vendas</li>
-          </ul>
+          <h3>2. CSAT & ACSI</h3>
+          <p class="formula-block">CSAT = (satisfeitos / total) × 100</p>
+          <p class="muted">O <b>American Customer Satisfaction Index</b> (ACSI) correlaciona com ROI, valor da firma (Tobin's Q) e cash flow (Anderson, Fornell &amp; Mazvancheryl, <i>J. Marketing</i>, 2004).</p>
         </div>
+
         <div class="card">
-          <h3>3. Indicadores Avançados</h3>
-          <ul class="formula-list">
-            <li><b>CAC</b> = marketing / clientes adquiridos</li>
-            <li><b>LTV/CAC</b> ≥ 3 (regra Harvard/MIT)</li>
-            <li><b>Produtividade</b> = receita / nº funcionários</li>
-          </ul>
+          <h3>3. Churn & Tempo de Vida</h3>
+          <p class="formula-block">Churn = Perdidos / Total no período × 100</p>
+          <p class="formula-block">Vida média = 1 / Churn anual</p>
+          <p class="muted">Ex.: churn 25% ⇒ vida média 4 anos. Análise agregada subestima churn em bases em rápido crescimento — prefira <b>cohorts</b>.</p>
         </div>
+
         <div class="card">
-          <h3>4. Diferencial Pedagógico</h3>
+          <h3>4. LTV / CLV (Harvard · MASB)</h3>
+          <p class="formula-block">LTV = Margem × [ r / (1 + d − r) ]</p>
+          <p class="muted"><b>r</b> = retenção anual, <b>d</b> = custo de capital. Endossada pela MASB · Farris et al., <i>Marketing Metrics</i> (2010). Versão simples: <code>Margem / Churn</code>.</p>
+        </div>
+
+        <div class="card">
+          <h3>5. CAC & LTV/CAC</h3>
+          <p class="formula-block">CAC = (Marketing + Vendas) / Novos clientes</p>
+          <p class="formula-block">LTV/CAC ≥ 3 · CAC Payback ≤ 12m (SaaS) / 18m (B2C)</p>
+          <p class="muted">Bessemer Venture Partners · Harvard Business School · MIT Sloan.</p>
+        </div>
+
+        <div class="card">
+          <h3>6. Service–Profit Chain</h3>
+          <p class="muted">Heskett, Sasser &amp; Schlesinger (HBR, 1994):</p>
           <ul>
-            <li>Simulador de decisões gerenciais</li>
-            <li>Comparação entre empresas / cenários</li>
-            <li>Benchmark automático com semáforos</li>
-            <li>Base para estudos de caso reais</li>
+            <li>Satisfação do funcionário → Qualidade do serviço interno</li>
+            <li>→ Valor percebido → Satisfação &amp; lealdade</li>
+            <li>→ Crescimento &amp; lucro</li>
+          </ul>
+          <p class="muted"><b>eNPS</b> é o proxy prático para o primeiro elo.</p>
+        </div>
+
+        <div class="card">
+          <h3>7. SERVQUAL — RATER</h3>
+          <p class="muted">Parasuraman, Zeithaml &amp; Berry (1988):</p>
+          <ul>
+            <li><b>R</b>eliability — confiabilidade</li>
+            <li><b>A</b>ssurance — segurança</li>
+            <li><b>T</b>angibles — aspectos físicos</li>
+            <li><b>E</b>mpathy — empatia</li>
+            <li><b>R</b>esponsiveness — agilidade</li>
           </ul>
         </div>
+
+        <div class="card">
+          <h3>8. Modelo Kano (1984)</h3>
+          <p class="muted">5 categorias de atributos:</p>
+          <ul>
+            <li><b>Must-be</b> — básicos</li>
+            <li><b>One-dimensional</b> — lineares</li>
+            <li><b>Attractive</b> — encantadores</li>
+            <li><b>Indifferent</b> — irrelevantes</li>
+            <li><b>Reverse</b> — quanto mais, pior</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>9. NRR & Revenue Churn</h3>
+          <p class="formula-block">NRR = Receita atual / Receita anterior × 100</p>
+          <p class="formula-block">Revenue Churn = max(0, 1 − NRR/100) × 100</p>
+          <p class="muted">NRR &gt; 100% indica expansão líquida (upsell &gt; churn).</p>
+        </div>
+
+        <div class="card">
+          <h3>10. Produtividade & Eficiência</h3>
+          <p class="formula-block">Produtividade = Receita / Nº funcionários</p>
+          <p class="formula-block">FCR = Resolvidos / Total · Conversão = Vendas / Atendimentos</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📚 Referências</h3>
+        <ul class="refs">
+          <li>Reichheld, F. F. (2003). <i>The One Number You Need to Grow</i>. <b>Harvard Business Review</b>, 81(12).</li>
+          <li>Reichheld &amp; Markey (2011). <i>The Ultimate Question 2.0</i>. HBR Press.</li>
+          <li>Heskett, Sasser &amp; Schlesinger (1994). <i>Putting the Service–Profit Chain to Work</i>. HBR.</li>
+          <li>Farris, Bendle, Pfeifer &amp; Reibstein (2010). <i>Marketing Metrics</i> (2nd ed.). Pearson — endossado pela MASB.</li>
+          <li>Fornell, Rust &amp; Dekimpe (2010). <i>J. Marketing Research</i>, 47(1).</li>
+          <li>Parasuraman, Zeithaml &amp; Berry (1988). SERVQUAL. <i>J. Retailing</i>, 64(1).</li>
+          <li>Kano, N. (1984). <i>Attractive Quality and Must-be Quality</i>.</li>
+          <li>Keiningham et al. (2007). <i>J. Marketing</i>, 71(3).</li>
+          <li>Anderson, Fornell &amp; Mazvancheryl (2004). <i>Customer Satisfaction and Shareholder Value</i>. J. Marketing, 68.</li>
+        </ul>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>© <span id="year"></span> · Material didático para <b>Prof. Dr. Batalhão</b>. Framework: Harvard Business School · MIT Sloan · London Business School.</p>
+      <p>© <span id="year"></span> · Material didático — <b>Prof. Dr. Batalhão</b>. Framework: HBS · MIT Sloan · LBS. Fonte metodológica: Farris et al. / MASB.</p>
     </div>
   </footer>
 
