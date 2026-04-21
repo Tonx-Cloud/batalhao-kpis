@@ -180,10 +180,10 @@
       </div>
 
       <div class="grid two-cols">
-        <div class="card"><h3>Camada Cliente</h3><canvas id="chart-customer" height="220"></canvas></div>
-        <div class="card"><h3>Camada Financeira</h3><canvas id="chart-financial" height="220"></canvas></div>
-        <div class="card"><h3>Camada Operacional</h3><canvas id="chart-operational" height="220"></canvas></div>
-        <div class="card"><h3>Composição NPS</h3><canvas id="chart-nps" height="220"></canvas></div>
+        <div class="card"><h3>Camada Cliente</h3><div class="chart-box"><canvas id="chart-customer"></canvas></div></div>
+        <div class="card"><h3>Camada Financeira</h3><div class="chart-box"><canvas id="chart-financial"></canvas></div></div>
+        <div class="card"><h3>Camada Operacional</h3><div class="chart-box"><canvas id="chart-operational"></canvas></div></div>
+        <div class="card"><h3>Composição NPS</h3><div class="chart-box"><canvas id="chart-nps"></canvas></div></div>
       </div>
 
       <div class="card">
@@ -237,7 +237,7 @@
       </div>
       <div class="card">
         <h3>Curva LTV × Retenção</h3>
-        <canvas id="chart-sens" height="220"></canvas>
+        <div class="chart-box"><canvas id="chart-sens"></canvas></div>
         <p class="muted">Base: LTV = ARPU × Margem × [ r / (1 + d − r) ]. Fonte: Farris et al., <i>Marketing Metrics</i> (2010); método endossado pela MASB.</p>
       </div>
     </section>
