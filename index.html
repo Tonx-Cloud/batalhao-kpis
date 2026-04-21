@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Simulador de KPIs de Gestão de Varejo de Serviços - Padrão Harvard / MIT / LBS" />
+  <title>Retail Service KPIs · Dr. Batalhão</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">B</div>
+        <div>
+          <h1>Retail Service KPIs</h1>
+          <p class="subtitle">Gestão de Varejo de Serviços · Framework Harvard / MIT / LBS</p>
+        </div>
+      </div>
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-tab="dashboard">Dashboard</button>
+        <button class="tab" data-tab="input">Entrada de Dados</button>
+        <button class="tab" data-tab="resultados">Resultados</button>
+        <button class="tab" data-tab="diagnostico">Diagnóstico</button>
+        <button class="tab" data-tab="teoria">Teoria</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="view active">
+      <div class="hero">
+        <h2>Painel Executivo</h2>
+        <p>Indicadores-chave do seu estudo de caso. Preencha os dados na aba <b>Entrada de Dados</b> para calcular automaticamente.</p>
+      </div>
+
+      <div class="grid kpi-grid">
+        <div class="card kpi" data-kpi="nps">
+          <div class="kpi-label">NPS <span class="hint" title="Net Promoter Score = %Promotores − %Detratores">ⓘ</span></div>
+          <div class="kpi-value" id="kpi-nps">—</div>
+          <div class="kpi-status" id="status-nps">Aguardando dados</div>
+        </div>
+        <div class="card kpi" data-kpi="csat">
+          <div class="kpi-label">CSAT <span class="hint" title="Customer Satisfaction Score">ⓘ</span></div>
+          <div class="kpi-value" id="kpi-csat">—</div>
+          <div class="kpi-status" id="status-csat">Aguardando dados</div>
+        </div>
+        <div class="card kpi" data-kpi="retention">
+          <div class="kpi-label">Retenção</div>
+          <div class="kpi-value" id="kpi-retention">—</div>
+          <div class="kpi-status" id="status-retention">Aguardando dados</div>
+        </div>
+        <div class="card kpi" data-kpi="churn">
+          <div class="kpi-label">Churn</div>
+          <div class="kpi-value" id="kpi-churn">—</div>
+          <div class="kpi-status" id="status-churn">Aguardando dados</div>
+        </div>
+        <div class="card kpi" data-kpi="ltv">
+          <div class="kpi-label">LTV <span class="hint" title="Customer Lifetime Value">ⓘ</span></div>
+          <div class="kpi-value" id="kpi-ltv">—</div>
+          <div class="kpi-status" id="status-ltv">Aguardando dados</div>
+        </div>
+        <div class="card kpi" data-kpi="cac">
+          <div class="kpi-label">CAC</div>
+          <div class="kpi-value" id="kpi-cac">—</div>
+          <div class="kpi-status" id="status-cac">Aguardando dados</div>
+        </div>
+        <div class="card kpi" data-kpi="ltvcac">
+          <div class="kpi-label">LTV / CAC <span class="hint" title="Regra Harvard/MIT: ideal ≥ 3">ⓘ</span></div>
+          <div class="kpi-value" id="kpi-ltvcac">—</div>
+          <div class="kpi-status" id="status-ltvcac">Aguardando dados</div>
+        </div>
+        <div class="card kpi" data-kpi="ticket">
+          <div class="kpi-label">Ticket Médio</div>
+          <div class="kpi-value" id="kpi-ticket">—</div>
+          <div class="kpi-status" id="status-ticket">Aguardando dados</div>
+        </div>
+        <div class="card kpi" data-kpi="conv">
+          <div class="kpi-label">Conversão</div>
+          <div class="kpi-value" id="kpi-conv">—</div>
+          <div class="kpi-status" id="status-conv">Aguardando dados</div>
+        </div>
+        <div class="card kpi" data-kpi="fcr">
+          <div class="kpi-label">FCR</div>
+          <div class="kpi-value" id="kpi-fcr">—</div>
+          <div class="kpi-status" id="status-fcr">Aguardando dados</div>
+        </div>
+        <div class="card kpi" data-kpi="tempo">
+          <div class="kpi-label">Tempo Médio</div>
+          <div class="kpi-value" id="kpi-tempo">—</div>
+          <div class="kpi-status" id="status-tempo">Aguardando dados</div>
+        </div>
+        <div class="card kpi" data-kpi="prod">
+          <div class="kpi-label">Produtividade</div>
+          <div class="kpi-value" id="kpi-prod">—</div>
+          <div class="kpi-status" id="status-prod">Aguardando dados</div>
+        </div>
+      </div>
+
+      <div class="grid two-cols">
+        <div class="card">
+          <h3>Camadas do Framework</h3>
+          <div class="layers">
+            <div class="layer">
+              <h4>🟦 Customer Layer</h4>
+              <ul><li>NPS</li><li>CSAT</li><li>Retenção</li></ul>
+            </div>
+            <div class="layer">
+              <h4>🟩 Financial Layer</h4>
+              <ul><li>LTV</li><li>Ticket médio</li><li>CAC</li></ul>
+            </div>
+            <div class="layer">
+              <h4>🟧 Operational Layer</h4>
+              <ul><li>Tempo de serviço</li><li>FCR</li><li>Conversão</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Insight-chave</h3>
+          <blockquote class="quote">
+            “Não se gerencia varejo de serviços apenas com vendas, mas com <b>valor do cliente ao longo do tempo</b>.”
+          </blockquote>
+          <p class="muted">Baseado na literatura de Harvard Business School, MIT Sloan e London Business School.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INPUT -->
+    <section id="input" class="view">
+      <div class="hero">
+        <h2>Entrada de Dados do Estudo de Caso</h2>
+        <p>Insira os valores do exercício. Todos os cálculos seguem as fórmulas do framework Harvard/MIT/LBS.</p>
+      </div>
+
+      <form id="form-kpi" class="card form">
+        <fieldset>
+          <legend>👥 Base de clientes</legend>
+          <div class="grid two-cols-form">
+            <label>Clientes iniciais
+              <input type="number" min="0" step="any" name="clientesIniciais" placeholder="Ex.: 1000" />
+            </label>
+            <label>Clientes finais
+              <input type="number" min="0" step="any" name="clientesFinais" placeholder="Ex.: 1100" />
+            </label>
+            <label>Novos clientes no período
+              <input type="number" min="0" step="any" name="novosClientes" placeholder="Ex.: 250" />
+            </label>
+            <label>Clientes perdidos
+              <input type="number" min="0" step="any" name="clientesPerdidos" placeholder="Ex.: 150" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>💰 Financeiro</legend>
+          <div class="grid two-cols-form">
+            <label>Receita total (R$)
+              <input type="number" min="0" step="any" name="receita" placeholder="Ex.: 500000" />
+            </label>
+            <label>Número de vendas
+              <input type="number" min="0" step="any" name="vendas" placeholder="Ex.: 2000" />
+            </label>
+            <label>Margem (%)
+              <input type="number" min="0" max="100" step="any" name="margem" placeholder="Ex.: 25" />
+            </label>
+            <label>Investimento em marketing (R$)
+              <input type="number" min="0" step="any" name="marketing" placeholder="Ex.: 50000" />
+            </label>
+            <label>Clientes adquiridos (pelo marketing)
+              <input type="number" min="0" step="any" name="clientesAdquiridos" placeholder="Ex.: 250" />
+            </label>
+            <label>Nº de funcionários
+              <input type="number" min="0" step="any" name="funcionarios" placeholder="Ex.: 20" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>⚙️ Operação</legend>
+          <div class="grid two-cols-form">
+            <label>Nº de atendimentos
+              <input type="number" min="0" step="any" name="atendimentos" placeholder="Ex.: 3000" />
+            </label>
+            <label>Tempo total de atendimento (min)
+              <input type="number" min="0" step="any" name="tempoTotal" placeholder="Ex.: 18000" />
+            </label>
+            <label>Problemas resolvidos no 1º contato
+              <input type="number" min="0" step="any" name="fcrResolvidos" placeholder="Ex.: 2100" />
+            </label>
+            <label>Total de problemas
+              <input type="number" min="0" step="any" name="fcrTotal" placeholder="Ex.: 3000" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>⭐ Pesquisa NPS & CSAT</legend>
+          <div class="grid two-cols-form">
+            <label>Promotores (notas 9–10)
+              <input type="number" min="0" step="any" name="promotores" placeholder="Ex.: 120" />
+            </label>
+            <label>Neutros (7–8)
+              <input type="number" min="0" step="any" name="neutros" placeholder="Ex.: 60" />
+            </label>
+            <label>Detratores (0–6)
+              <input type="number" min="0" step="any" name="detratores" placeholder="Ex.: 20" />
+            </label>
+            <label>Clientes satisfeitos (CSAT)
+              <input type="number" min="0" step="any" name="csatSatisfeitos" placeholder="Ex.: 180" />
+            </label>
+            <label>Total de respostas CSAT
+              <input type="number" min="0" step="any" name="csatTotal" placeholder="Ex.: 200" />
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button type="submit" class="btn primary">Calcular indicadores</button>
+          <button type="button" class="btn" id="btn-exemplo">Preencher com exemplo</button>
+          <button type="reset" class="btn ghost" id="btn-limpar">Limpar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- RESULTADOS -->
+    <section id="resultados" class="view">
+      <div class="hero">
+        <h2>Resultados & Gráficos</h2>
+        <p>Visualização dos KPIs com semáforo de performance.</p>
+      </div>
+
+      <div class="grid two-cols">
+        <div class="card">
+          <h3>Camada do Cliente</h3>
+          <canvas id="chart-customer" height="220"></canvas>
+        </div>
+        <div class="card">
+          <h3>Camada Financeira</h3>
+          <canvas id="chart-financial" height="220"></canvas>
+        </div>
+        <div class="card">
+          <h3>Camada Operacional</h3>
+          <canvas id="chart-operational" height="220"></canvas>
+        </div>
+        <div class="card">
+          <h3>Composição NPS</h3>
+          <canvas id="chart-nps" height="220"></canvas>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Tabela consolidada</h3>
+        <div class="table-wrap">
+          <table id="tabela-resultados">
+            <thead>
+              <tr><th>Indicador</th><th>Valor</th><th>Fórmula</th><th>Status</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIAGNÓSTICO -->
+    <section id="diagnostico" class="view">
+      <div class="hero">
+        <h2>Diagnóstico Inteligente</h2>
+        <p>Recomendações gerenciais automáticas com base nos KPIs calculados.</p>
+      </div>
+      <div id="diagnostico-lista" class="diagnostico">
+        <div class="card muted">Preencha os dados e clique em <b>Calcular indicadores</b> para ver o diagnóstico.</div>
+      </div>
+    </section>
+
+    <!-- TEORIA -->
+    <section id="teoria" class="view">
+      <div class="hero">
+        <h2>Referencial Teórico</h2>
+        <p>Fórmulas e lógica gerencial segundo Harvard / MIT Sloan / London Business School.</p>
+      </div>
+
+      <div class="grid two-cols">
+        <div class="card">
+          <h3>1. Indicadores Centrais (Core KPIs)</h3>
+          <ul class="formula-list">
+            <li><b>NPS</b> = %Promotores − %Detratores <span class="src">Reichheld · Harvard</span></li>
+            <li><b>CSAT</b> = (satisfeitos / total de respostas) × 100</li>
+            <li><b>Retenção</b> = ((Finais − Novos) / Iniciais) × 100</li>
+            <li><b>Churn</b> = (Perdidos / Totais) × 100</li>
+            <li><b>LTV</b> = (Receita média × Margem) / Churn</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>2. Indicadores Operacionais</h3>
+          <ul class="formula-list">
+            <li><b>Tempo médio</b> = Σ tempo / nº atendimentos</li>
+            <li><b>FCR</b> = resolvidos no 1º contato / total de problemas</li>
+            <li><b>Conversão</b> = (vendas / atendimentos) × 100</li>
+            <li><b>Ticket médio</b> = receita / nº vendas</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>3. Indicadores Avançados</h3>
+          <ul class="formula-list">
+            <li><b>CAC</b> = marketing / clientes adquiridos</li>
+            <li><b>LTV/CAC</b> ≥ 3 (regra Harvard/MIT)</li>
+            <li><b>Produtividade</b> = receita / nº funcionários</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>4. Diferencial Pedagógico</h3>
+          <ul>
+            <li>Simulador de decisões gerenciais</li>
+            <li>Comparação entre empresas / cenários</li>
+            <li>Benchmark automático com semáforos</li>
+            <li>Base para estudos de caso reais</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> · Material didático para <b>Prof. Dr. Batalhão</b>. Framework: Harvard Business School · MIT Sloan · London Business School.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
